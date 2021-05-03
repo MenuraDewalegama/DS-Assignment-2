@@ -5,7 +5,7 @@ const app = new Koa();
 const PORT = process.env.PORT;
 
 app.use(ctx => {
-    ctx.body = 'Hello';
+    ctx.body = 'Hello world';
 });
 
 app.listen(PORT, ()=> {
