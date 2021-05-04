@@ -10,8 +10,10 @@
   "author": "2021S1_JUNE_WE_05",
   "license": "ISC",
   "dependencies": {
+    "@koa/router": "^10.0.0",
     "dotenv": "^8.2.0",
     "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
     "mongodb": "^3.6.6"
   }
 }
