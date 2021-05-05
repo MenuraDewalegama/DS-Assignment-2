@@ -1,4 +1,4 @@
-const cart = require('./').db('cart').collection('CustomerID'); // Todo: This CustomerID string should be exact customer ID
+const cart = require('../dal/db').db('ecommerceDB').collection('cart'); // Todo: This CustomerID string should be exact customer ID
 
 const save = async ({CustomerID, productId, productName, description, addedDate}) =>{
     const result = await cart.insertOne({CustomerID, productId, productName, description, addedDate});
@@ -10,12 +10,12 @@ const getAll = async () =>{
     return cursor.toArray();
 };
 
-const findViewById = async (id) =>{
-    return await cart.findOne({id})
+const findViewById = async (CustomerID) =>{
+    return await cart.findOne({CustomerID})
 }
 
-const removeById = async (id) =>{
-    const result = await cart.deleteOne({id});
+const removeById = async (CustomerID) =>{
+    const result = await cart.deleteOne({CustomerID});
     return result.ops[0];
 }
 
