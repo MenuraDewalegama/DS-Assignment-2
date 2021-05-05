@@ -5,8 +5,9 @@ const save = async ({CustomerID, productId, productName, description, addedDate}
     return result.ops[0];
 };
 
+const userID = "1234";
 const getAll = async () =>{
-    const cursor = await cart.find();
+    const cursor = await cart.find({"CustomerID": userID});
     return cursor.toArray();
 };
 
