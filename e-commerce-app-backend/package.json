@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "2021S1_JUNE_WE_05",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "koa-bodyparser": "^4.3.0",
     "mongodb": "^3.6.6",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
