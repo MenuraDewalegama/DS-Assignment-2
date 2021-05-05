@@ -18,13 +18,13 @@ const getProducts = async () =>{
     return await getAll();
 }
 
-const getProduct = async (id) =>{
-    return  await findViewById(id);
+const getProduct = async (CustomerID) =>{
+    return  await findViewById(CustomerID);
 }
 
-const removeProductById = async  (id) =>{
-    const x = await findViewById(id);
-     await removeById(id);
+const removeProductById = async  (CustomerID) =>{
+    const x = await findViewById(CustomerID);
+     await removeById(CustomerID);
     return x;
 }
 
