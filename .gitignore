@@ -1,0 +1,41 @@
+/node_modules
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/target
+
+
+# IDEs and editors
+/.idea
+*.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# backend project IDE realted
+/e-commerce-app-backend/.idea
+/e-commerce-app-backend/*.iml
+/e-commerce-app-backend/node_modules
+/e-commerce-app-backend/package-lock.json
+
+# frontend project IDE realted
+/e-commerce-app-frontend/.idea
+/e-commerce-app-frontend/*.iml
+/e-commerce-app-frontend/node_modules
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# System Files
+.DS_Store
+Thumbs.db
