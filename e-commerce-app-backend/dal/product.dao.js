@@ -1,6 +1,6 @@
-const products = require('./db').db('ecommerceDB').collection('products');
+const products = require('../util/database.util').db('ecommerceDB').collection('products');
 
-const addproduct = async ({ id, name, description, price }) => {
+const addProduct = async ({ id, name, description, price }) => {
     const result = await products.insertOne({ id, name, description, price });
     return result.ops[0];
 };
@@ -23,4 +23,4 @@ const updateProductById = async (id, { name, description, price }) => {
     return result.ops[0];
 };
 
-module.exports = { addproduct, getAllProducts, getProductById, removeProductById, updateProductById }
+module.exports = { addProduct: addProduct, getAllProducts, getProductById, removeProductById, updateProductById }

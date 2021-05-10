@@ -1,10 +1,13 @@
-const { MongoClient } = require('mongodb');
+const {MongoClient} = require('mongodb');
 const dotenv = require('dotenv').config();
 
+if (dotenv.error) {
+    throw dotenv.error;
+}
 
 const DATABASE = process.env.DATABASE;
 
-const client = new MongoClient(DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(DATABASE, {useNewUrlParser: true, useUnifiedTopology: true});
 
 client.connect(err => {
     if (err) {

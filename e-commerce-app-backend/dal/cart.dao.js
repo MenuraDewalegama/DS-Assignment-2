@@ -1,4 +1,4 @@
-const cart = require('../dal/db').db('ecommerceDB').collection('cart'); // Todo: This CustomerID string should be exact customer ID
+const cart = require('../util/database.util').db('ecommerceDB').collection('cart'); // Todo: This CustomerID string should be exact customer ID
 
 const save = async ({CustomerID, productId, productName, description, addedDate}) =>{
     const result = await cart.insertOne({CustomerID, productId, productName, description, addedDate});

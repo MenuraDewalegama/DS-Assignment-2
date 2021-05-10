@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const { addproduct, getAllProducts, getProductById, removeProductById, updateProductById } = require('../dal/product.dao');
+const { addProduct, getAllProducts, getProductById, removeProductById, updateProductById } = require('../dal/product.dao');
 
 const product = new Map();
 
@@ -10,7 +10,7 @@ const createProduct = async ({ name, description, price }) => {
         description,
         price
     }
-    return await addproduct(product);
+    return await addProduct(product);
 };
 
 const getProducts = async () => {

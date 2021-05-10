@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const dotenv = require('dotenv').config();
-require('../e-commerce-app-backend/dal/db');
+require('./util/database.util');
 const CartRoutes = require('../e-commerce-app-backend/routes/cart.routes');
 const ProductRoutes = require('../e-commerce-app-backend/routes/product.routes');
 const bodyparser = require('koa-bodyparser');
