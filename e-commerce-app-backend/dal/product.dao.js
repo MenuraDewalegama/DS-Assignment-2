@@ -13,8 +13,6 @@ const addProduct = async ({id, name, description, unitPrice, handOnQuantity}) =>
 
 const updateProduct = async (id, {name, description, unitPrice, handOnQuantity}) => {
     return await products.update(id,)
-    // const result = await products.replaceOne({id}, {id, name, description, price});
-    // return result.ops[0];
 };
 
 
@@ -33,9 +31,9 @@ const getAllProducts = async () => {
 
 
 module.exports = {
-    addProduct: addProduct,
-    getAllProducts,
-    getProduct,
+    addProduct,
+    updateProduct,
     deleteProduct,
-    updateProduct
+    getProduct,
+    getAllProducts,
 }
