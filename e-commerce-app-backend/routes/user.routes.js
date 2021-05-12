@@ -52,7 +52,29 @@ router.get('/:id', async (ctx) => {
 
 /** add a user. */
 router.post('/', async (ctx) => {
-    console.log('post method called');
+    const user = ctx.request.body;
+
+    /* validate user input. */
+    // TODO: validate user input.
+
+    
+    try { /* add the user. */
+        const generatedResult = await addUser({
+            name: user.name,
+            contactNo: user.contactNo,
+            password: user.password, // TODO: encrypt the password
+            type: user.type
+        });
+        ctx.response.type = 'application/json';
+        ctx.response.status = 201; // created
+        ctx.response.body = {
+            "generatedId": generatedResult.insertedId
+        };
+
+    } catch (error) {
+        ctx.response.status = 500; // internal server error.
+        console.error(error);
+    }
 });
 
 
