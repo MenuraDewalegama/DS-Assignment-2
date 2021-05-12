@@ -34,7 +34,7 @@ const getUser = (userID) => {
 const addUser = (user) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await userDAO.getUser(user));
+            resolve(await userDAO.addUser(user));
         } catch (error) {
             reject(error);
         }
@@ -56,7 +56,7 @@ const updateUser = (userID, userData) => {
 const deleteUser = (userID) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await userDAO.updateUser(userID));
+            resolve(await userDAO.deleteUser(userID));
         } catch (error) {
             reject(error);
         }
