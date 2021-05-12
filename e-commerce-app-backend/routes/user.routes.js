@@ -29,7 +29,25 @@ router.get('/', async (ctx) => {
 
 /** get users by ID. */
 router.get('/:id', async (ctx) => {
-    console.log('get with id called');
+    const id = ctx.params.id;
+
+    /* validate input. */
+    // TODO: validate input.
+
+    try {
+        ctx.response.type = 'application/json';
+        const result = await getUser(id);
+        if (result) {
+            ctx.response.status = 200;
+            ctx.response.body = result;
+        } else {
+            /* no matching user found. */
+            ctx.response.status = 404;
+        }
+    } catch (error) {
+        ctx.response.status = 500;
+        console.log(error);
+    }
 });
 
 /** add a user. */
