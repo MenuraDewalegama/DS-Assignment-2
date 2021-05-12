@@ -32,7 +32,7 @@ const validateName = (user) => {
 const validateContactNo = (user) => {
     let errorMessage = '';
     if (user.hasOwnProperty('contactNo')) {
-        if (new RegExp('^[\\d]{10}$').test(user.name)) {
+        if (new RegExp('^[\\d]{10}$').test(user.contactNo)) {
             errorMessage = '';
         } else {
             errorMessage += 'Contact No is invalid. Contact no should be 10 digit number. ex: 0771234567 \n';
@@ -47,7 +47,7 @@ const validateContactNo = (user) => {
 const validateType = (user) => {
     let errorMessage = '';
     if (user.hasOwnProperty('type')) {
-        if (new RegExp('^ADMIN$|^USER$').test(user.name)) {
+        if (new RegExp('^ADMIN$|^USER$').test(user.type)) {
             errorMessage = '';
         } else {
             errorMessage += 'Type is invalid. ADMIN and USER (in uppercase) are only valid inputs.\n';
@@ -61,8 +61,8 @@ const validateType = (user) => {
 
 const validatePassword = (user) => {
     let errorMessage = '';
-    if (user.hasOwnProperty('type')) {
-        if (user?.name?.length >= 6) {
+    if (user.hasOwnProperty('password')) {
+        if (user?.password?.length >= 6) {
             errorMessage = '';
         } else {
             errorMessage += 'Password is weak. Your password should contain at least 6 digit or more.\n';

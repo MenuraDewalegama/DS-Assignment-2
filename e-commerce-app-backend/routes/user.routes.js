@@ -4,9 +4,6 @@
 */
 
 const Router = require('@koa/router');
-const path = require('path');
-const fs = require('fs');
-const mimeTypes = require('mime-types');
 
 const router = new Router({
     prefix: "/users"
@@ -14,6 +11,7 @@ const router = new Router({
 
 const {getAllUsers, getUser, addUser, updateUser, deleteUser} = require('../api/user.api');
 const userValidation = require('./validation/user.validation');
+const commonValidation = require('./validation/common.validation');
 
 /** get all users. */
 router.get('/', async (ctx) => {
@@ -32,11 +30,13 @@ router.get('/', async (ctx) => {
 router.get('/:id', async (ctx) => {
     const id = ctx.request.params.id;
 
-    console.log(id);
     /* validate input. */
-    // TODO: validate input.
-    if (userValidation){
-
+    const validationResult = commonValidation.validateID(id);
+    if (validationResult.length !== 0) {
+        /* found errors. */
+        ctx.response.status = 400;
+        ctx.response.body = validationResult;
+        return;
     }
 
     try {
@@ -60,9 +60,11 @@ router.post('/', async (ctx) => {
     const user = ctx.request.body;
 
     /* validate user input. */
-    if (userValidation.validateUser(user).length !== 0){
+    const validationResult = userValidation.validateUser(user);
+    if (validationResult.length !== 0) {
         /* found errors .*/
         ctx.response.status = 400; // bad request
+        ctx.response.body = validationResult;
         return;
     }
 
@@ -88,13 +90,19 @@ router.post('/', async (ctx) => {
 
 /** update a user. */
 router.put('/:id', async (ctx) => {
-    const id = ctx.params.id;
+    const id = ctx.request.params.id;
 
     /* validate input. */
-    // TODO: validate input.
+    const validationResult = commonValidation.validateID(id);
+    if (validationResult.length !== 0) {
+        /* found errors. */
+        ctx.response.status = 400;
+        ctx.response.body = validationResult;
+        return;
+    }
 
     /* check whether there is a matching record for the given id. */
-    if (!await getUser(id)){
+    if (!await getUser(id)) {
         /* if no record found. */
         ctx.response.status = 404;
         return;
@@ -124,7 +132,13 @@ router.delete('/:id', async (ctx) => {
     const id = ctx.params.id;
 
     /* validate input. */
-    // TODO: validate input.
+    const validationResult = commonValidation.validateID(id);
+    if (validationResult?.length !== 0) {
+        /* found errors. */
+        ctx.response.status = 400;
+        ctx.response.body = validationResult;
+        return;
+    }
 
     /* check whether there is a matching record for the given id. */
     try {
