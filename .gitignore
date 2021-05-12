@@ -22,11 +22,14 @@
 /e-commerce-app-backend/*.iml
 /e-commerce-app-backend/node_modules
 /e-commerce-app-backend/package-lock.json
+/e-commerce-app-backend/dal/test.js
+/e-commerce-app-backend/assets
 
 # frontend project IDE realted
 /e-commerce-app-frontend/.idea
 /e-commerce-app-frontend/*.iml
 /e-commerce-app-frontend/node_modules
+/e-commerce-app-frontend/package-lock.json
 
 # IDE - VSCode
 .vscode/*
