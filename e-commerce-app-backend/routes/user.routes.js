@@ -12,9 +12,19 @@ const router = new Router({
     prefix: "/users"
 });
 
+const {getAllUsers, getUser, addUser, updateUser, deleteUser} = require('../api/user.api');
+
 /** get all users. */
 router.get('/', async (ctx) => {
-    console.log('get method called');
+    try {
+        const result = await getAllUsers();
+        ctx.response.type = 'application/json';
+        ctx.response.status = 200;
+        ctx.response.body = result;
+    } catch (error) {
+        ctx.response.status = 500;
+        console.log(error);
+    }
 });
 
 /** get users by ID. */
