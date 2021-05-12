@@ -13,6 +13,7 @@ const router = new Router({
 });
 
 const {getAllUsers, getUser, addUser, updateUser, deleteUser} = require('../api/user.api');
+const userValidation = require('./validation/user.validation');
 
 /** get all users. */
 router.get('/', async (ctx) => {
@@ -34,6 +35,9 @@ router.get('/:id', async (ctx) => {
     console.log(id);
     /* validate input. */
     // TODO: validate input.
+    if (userValidation){
+
+    }
 
     try {
         ctx.response.type = 'application/json';
@@ -56,8 +60,11 @@ router.post('/', async (ctx) => {
     const user = ctx.request.body;
 
     /* validate user input. */
-    // TODO: validate user input.
-
+    if (userValidation.validateUser(user).length !== 0){
+        /* found errors .*/
+        ctx.response.status = 400; // bad request
+        return;
+    }
 
     try { /* add the user. */
         const generatedResult = await addUser({
