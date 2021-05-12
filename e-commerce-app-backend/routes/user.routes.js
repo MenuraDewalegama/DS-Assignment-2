@@ -109,7 +109,40 @@ router.put('/:id', async (ctx) => {
 
 /** delete a user by ID. */
 router.delete('/:id', async (ctx) => {
-    console.log('delete method called');
+    const id = ctx.params.id;
+
+    /* validate input. */
+    // TODO: validate input.
+
+    /* check whether there is a matching record for the given id. */
+    try {
+        const result = await getUser(id);
+        if (result) {
+            /* found a matching record for the given ID. */
+            try {
+                const result = await deleteUser(id);
+                if (result?.deletedCount === 1) {
+                    /* record delete successfully. */
+                    ctx.response.status = 204;
+                } else {
+                    /* something went wrong with delete operation. */
+                    ctx.response.status = 500;
+                }
+            } catch (error) {
+                ctx.response.status = 500;
+                console.error(error);
+            }
+        } else {
+            /* no matching record found for the given ID. */
+            ctx.response.status = 404;
+        }
+
+    } catch (error) {
+        /* something went wrong when finding a matching record. */
+        ctx.response.status = 500;
+        console.error(error);
+    }
+
 });
 
 module.exports = router;
