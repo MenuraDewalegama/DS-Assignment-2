@@ -57,7 +57,7 @@ router.post('/', async (ctx) => {
     /* validate user input. */
     // TODO: validate user input.
 
-    
+
     try { /* add the user. */
         const generatedResult = await addUser({
             name: user.name,
@@ -80,7 +80,31 @@ router.post('/', async (ctx) => {
 
 /** update a user. */
 router.put('/:id', async (ctx) => {
-    console.log('put method called');
+    const id = ctx.params.id;
+
+    /* validate input. */
+    // TODO: validate input.
+
+    /* check whether there is a matching record for the given id. */
+    // TODO: check for matching record
+
+    /* read the request body and get the user details. */
+    let user = ctx.request.body;
+
+    try { /* update the product. */
+        const result = await updateUser(id, {
+            name: user.name,
+            contactNo: user.contactNo,
+            password: user.password, // TODO: encrypt the password
+            type: user.type
+        });
+        ctx.response.status = 204;
+    } catch (error) {
+        /* something wrong with update process. */
+        ctx.response.status = 500; // internal server error.
+        console.error(error);
+    }
+
 });
 
 /** delete a user by ID. */
