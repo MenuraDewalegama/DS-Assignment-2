@@ -86,7 +86,11 @@ router.put('/:id', async (ctx) => {
     // TODO: validate input.
 
     /* check whether there is a matching record for the given id. */
-    // TODO: check for matching record
+    if (!await getUser(id)){
+        /* if no record found. */
+        ctx.response.status = 404;
+        return;
+    }
 
     /* read the request body and get the user details. */
     let user = ctx.request.body;
