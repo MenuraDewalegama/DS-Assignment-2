@@ -33,11 +33,13 @@ if (!fs.existsSync(productsDir)) {
 const AssetsRoutes = require('../e-commerce-app-backend/routes/asset.routes');
 const CartRoutes = require('../e-commerce-app-backend/routes/cart.routes');
 const ProductRoutes = require('../e-commerce-app-backend/routes/product.routes');
+const UserRoutes = require('../e-commerce-app-backend/routes/user.routes');
 
 
 app.use(AssetsRoutes.routes()).use(AssetsRoutes.allowedMethods());
 app.use(CartRoutes.routes()).use(CartRoutes.allowedMethods());
 app.use(ProductRoutes.routes()).use(ProductRoutes.allowedMethods());
+app.use(UserRoutes.routes()).use(UserRoutes.allowedMethods());
 
 
 app.listen(PORT, () => {
