@@ -1,26 +1,46 @@
-const products = require('../util/database.util').db('ecommerceDB').collection('products');
+// const products = require('../util/database.util').db('ecommerceDB').collection('products');
+// import DatabaseService from '../util/database.service.js';
 
-const addProduct = async ({ id, name, description, price }) => {
-    const result = await products.insertOne({ id, name, description, price });
-    return result.ops[0];
+const DatabaseService = require('../service/database.service.js');
+
+const collectionName = 'products';
+const products = new DatabaseService(collectionName);
+
+const addProduct = async ({name, description, unitPrice, handOnQuantity, imagePath}) => {
+    return await products.save({name, description, unitPrice, handOnQuantity, imagePath});
+};
+
+const updateProduct = async (id, {name, description, unitPrice, handOnQuantity, imagePath}) => {
+    const product = {name,
+        description,
+        unitPrice,
+        handOnQuantity,
+        imagePath};
+    return await products.update(id, product);
+};
+
+const updateProductImagePath = async (id, { imagePath }) => {
+    return await products.update(id, { imagePath });
+};
+
+const deleteProduct = async id => {
+    return await products.delete(id);
+};
+
+
+const getProduct = async id => {
+    return await products.findById(id);
 };
 
 const getAllProducts = async () => {
-    const cursor = await products.find();
-    return cursor.toArray();
+    return await products.findAll();
 };
 
-const getProductById = async id => {
-    return await products.findOne({ id });
-};
-
-const removeProductById = async id => {
-    await products.deleteOne({ id })
-};
-
-const updateProductById = async (id, { name, description, price }) => {
-    const result = await products.replaceOne({ id }, { id, name, description, price });
-    return result.ops[0];
-};
-
-module.exports = { addProduct: addProduct, getAllProducts, getProductById, removeProductById, updateProductById }
+module.exports = {
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    getProduct,
+    getAllProducts,
+    updateProductImagePath,
+}
