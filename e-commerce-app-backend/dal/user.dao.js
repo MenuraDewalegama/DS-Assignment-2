@@ -24,7 +24,7 @@ const getAllUsers = () => {
 const getUser = (userID) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await users.findById({_id: ObjectID(userID)}));
+            resolve(await users.findById(userID));
         } catch (error) {
             reject(error);
         }
@@ -57,7 +57,7 @@ const updateUser = async (userID, user) => {
 const deleteUser = async (userID) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await users.delete({_id: ObjectID(userID)}));
+            resolve(await users.delete(userID));
         } catch (error) {
             reject(error);
         }

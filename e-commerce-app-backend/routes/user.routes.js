@@ -29,8 +29,9 @@ router.get('/', async (ctx) => {
 
 /** get users by ID. */
 router.get('/:id', async (ctx) => {
-    const id = ctx.params.id;
+    const id = ctx.request.params.id;
 
+    console.log(id);
     /* validate input. */
     // TODO: validate input.
 
