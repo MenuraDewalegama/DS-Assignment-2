@@ -4,6 +4,7 @@ import Navbar from './navbar'
 import Login from './login'
 import User from './user'
 import Register from './register'
+import Main from './main';
 
 
 
@@ -12,13 +13,14 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <Router>
-                <Navbar/>
-                <br />
-                <Route path="/login/" component={Login}/>
-                <Route path="/user/" component={User}/>
-                <Route path="/register/" component={Register}/>
 
+            <Router>
+                <Switch>
+                    <Route path='/'>
+                        <Navbar />
+                        <Main />
+                    </Route>
+                </Switch>
             </Router>
         );
     }
