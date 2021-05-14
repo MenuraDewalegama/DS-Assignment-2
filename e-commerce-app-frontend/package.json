@@ -1,0 +1,20 @@
+{
+  "name": "e-commerce-app-frontend",
+  "version": "1.0.0",
+  "description": "This project is created as an assignment for the Distributed Systems - SE3020 module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "author": "2021S1_JUNE_WE_05",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.0.0-beta.2",
+    "bootstrap": "^5.0.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  }
+}
