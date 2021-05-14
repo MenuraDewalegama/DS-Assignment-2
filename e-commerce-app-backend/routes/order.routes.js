@@ -59,12 +59,28 @@ router.get('/:id', async (ctx) => {
 router.post('/', async (ctx) => {
     const order = ctx.request.body;
 
-    /* validate order input. */
-    const validationResult = orderValidation.validateOrder(order);
-    if (validationResult.length !== 0) {
+    try { /* validate order input. */
+        await orderValidation.validateOrder(order);
+    } catch (validationErrors) {
         /* found errors .*/
         ctx.response.status = 400; // bad request
-        ctx.response.body = validationResult;
+        ctx.response.body = validationErrors;
+        return;
+    }
+
+    /* validate order-details. */
+    try {
+        await orderValidation?.validateOrderDetails(order?.orderDetails);
+    } catch (error) {
+        /* found errors .*/
+        ctx.response.status = 400; // bad request
+        let errorMessage = '';
+        for (const errorElement of error) {
+            console.log(errorElement);
+            errorMessage += `${errorElement?.providedURL} : ${errorElement?.message}\n`;
+        }
+        ctx.response.type = 'text/plain';
+        ctx.response.body = errorMessage;
         return;
     }
 
@@ -92,12 +108,15 @@ router.post('/', async (ctx) => {
 router.put('/:id', async (ctx) => {
     const id = ctx.request.params.id;
 
-    /* validate order input. */
-    const validationResult = orderValidation.validateOrder(order);
-    if (validationResult.length !== 0) {
+    /* read the request body and get the order details. */
+    let order = ctx.request.body;
+
+    try { /* validate order input. */
+        await orderValidation.validateOrder(order);
+    } catch (validationErrors) {
         /* found errors .*/
         ctx.response.status = 400; // bad request
-        ctx.response.body = validationResult;
+        ctx.response.body = validationErrors;
         return;
     }
 
@@ -107,9 +126,6 @@ router.put('/:id', async (ctx) => {
         ctx.response.status = 404;
         return;
     }
-
-    /* read the request body and get the order details. */
-    let order = ctx.request.body;
 
     try { /* update the product. */
         const result = await updateOrder(id, {

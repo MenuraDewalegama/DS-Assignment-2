@@ -3,6 +3,8 @@
 @date : 12/05/2021
 */
 
+const commonValidation = require('./common.validation');
+const userAPI = require('../../api/user.api');
 
 const validateUser = (user) => {
     let errorMessage = '';
@@ -75,10 +77,18 @@ const validatePassword = (user) => {
 };
 
 
+/** check for the user by URL.
+ * @param URL ex: /users/{24 digit ID}
+ * @returns Promise with the product if found, otherwise reason. */
+const checkRecordByURI = async (userURI) => {
+    return await commonValidation.isEntityExists('users', userURI, userAPI.getUser);
+}
+
 module.exports = {
     validateName,
     validateContactNo,
     validateType,
     validatePassword,
-    validateUser
+    validateUser,
+    checkRecordByURI
 }
