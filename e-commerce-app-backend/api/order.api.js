@@ -64,10 +64,26 @@ const deleteOrder = (orderID) => {
 };
 
 
+/* order- details ================================================== */
+
+/** get all order-details for an order. */
+const getAllOrderDetails = (orderID) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await orderDAO.getOrderDetails(orderID));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+
+
 module.exports = {
     getAllOrders,
     getOrder,
     addOrder,
     updateOrder,
-    deleteOrder
+    deleteOrder,
+    getAllOrderDetails
 }

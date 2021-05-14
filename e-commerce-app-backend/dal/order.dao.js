@@ -62,8 +62,22 @@ const deleteOrder = async (orderID) => {
             reject(error);
         }
     });
-}
+};
 
+/** get order details by orderID.
+ *
+ * @param orderID order record ID.
+ * @return Promise with orderDetails are found, otherwise error.
+ * */
+const getOrderDetails = (orderID) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await orders.findAndProject(orderID, {orderDetails: 1}));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
 
 
 module.exports = {
@@ -72,4 +86,5 @@ module.exports = {
     addOrder,
     updateOrder,
     deleteOrder,
+    getOrderDetails
 }

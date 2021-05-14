@@ -10,6 +10,7 @@ const router = new Router({
 });
 
 const {getAllOrders, getOrder, addOrder, updateOrder, deleteOrder} = require('../api/order.api');
+const {getAllOrderDetails} = require('../api/order.api');
 const orderValidation = require('./validation/order.validation');
 const commonValidation = require('./validation/common.validation');
 
@@ -30,29 +31,16 @@ router.get('/', async (ctx) => {
 router.get('/:id', async (ctx) => {
     const id = ctx.request.params.id;
 
-    /* validate input. */
-    const validationResult = commonValidation.validateID(id);
-    if (validationResult.length !== 0) {
-        /* found errors. */
-        ctx.response.status = 400;
-        ctx.response.body = validationResult;
-        return;
+    try {
+        const context = await validationProcessOfOrderID(id, ctx);
+        ctx.response.status = context.response.status;
+        ctx.response.body = context.response.body;
+
+    } catch (errorContext) {
+        ctx.response.status = errorContext.response.status;
+        ctx.response.body = errorContext.response.body;
     }
 
-    try {
-        ctx.response.type = 'application/json';
-        const result = await getOrder(id);
-        if (result) {
-            ctx.response.status = 200;
-            ctx.response.body = result;
-        } else {
-            /* no matching order found. */
-            ctx.response.status = 404;
-        }
-    } catch (error) {
-        ctx.response.status = 500;
-        console.log(error);
-    }
 });
 
 /** add a order. */
@@ -186,5 +174,75 @@ router.delete('/:id', async (ctx) => {
     }
 
 });
+
+
+/* order-details ====================================================================================================*/
+
+router.get('/:orderID/order-details', async (ctx) => {
+    const orderID = ctx.request.params?.orderID;
+
+    try {
+        const context = await validationProcessOfOrderID(orderID, ctx);
+
+        if (context.response.status === 200) {
+            try {
+                const resultOrderDetails = await getAllOrderDetails(orderID);
+                ctx.response.type = 'application/json';
+                ctx.response.status = 200;
+                ctx.response.body = resultOrderDetails;
+
+            } catch (error) {
+                ctx.response.status = 500;
+                console.log(error);
+            }
+        }
+
+    } catch (errorContext) {
+        ctx.response.status = errorContext.response.status;
+        ctx.response.body = errorContext.response.body;
+    }
+});
+
+
+// router.get('/:orderID/order-details/:orderDetailID', (ctx) => {
+//     const orderID = ctx.request.params?.orderID;
+//     const orderDetailID = ctx.request.params?.orderDetailID;
+//
+//     console.log(orderID);
+//     console.log(orderDetailID);
+// });
+
+
+const validationProcessOfOrderID = async (orderID, ctx) => {
+
+    return new Promise(async (resolve, reject) => {
+        /* validate input. */
+        const validationResult = commonValidation.validateID(orderID);
+        if (validationResult.length !== 0) {
+            /* found errors. */
+            ctx.response.status = 400;
+            ctx.response.body = validationResult;
+            reject(ctx);
+        }
+
+        try {
+            ctx.response.type = 'application/json';
+            const resultGetOrder = await getOrder(orderID);
+            if (resultGetOrder) {
+                ctx.response.status = 200;
+                ctx.response.body = resultGetOrder;
+                resolve(ctx);
+            } else {
+                /* no matching order found. */
+                ctx.response.status = 404;
+                reject(ctx);
+            }
+        } catch (error) {
+            ctx.response.status = 500;
+            console.log(error);
+            reject(ctx);
+        }
+    });
+}
 
 module.exports = router;
