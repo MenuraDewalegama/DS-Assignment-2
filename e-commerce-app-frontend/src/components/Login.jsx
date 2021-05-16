@@ -1,9 +1,8 @@
-import React from 'react'
-import * as ReactBootStrap from 'react-bootstrap'
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
-import User from './User'
-import Register from './Register'
-
+import React from 'react';
+import * as ReactBootStrap from 'react-bootstrap';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import User from './User';
+import Register from './Register';
 
 
 export default class Login extends React.Component {
@@ -15,8 +14,6 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-
-
                 <div className="container-sm">
                     <br />
                     <h1>Login</h1>
