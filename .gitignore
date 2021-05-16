@@ -30,6 +30,8 @@
 /e-commerce-app-frontend/*.iml
 /e-commerce-app-frontend/node_modules
 /e-commerce-app-frontend/package-lock.json
+/e-commerce-app-frontend/dist
+/e-commerce-app-frontend/.parcel-cache
 
 # IDE - VSCode
 .vscode/*
