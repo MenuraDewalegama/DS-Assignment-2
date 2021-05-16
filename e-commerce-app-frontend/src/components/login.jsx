@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ReactBootStrap from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
-import User from './user'
+import User from './User'
 import Register from './register'
 
 
