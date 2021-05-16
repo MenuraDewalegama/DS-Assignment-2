@@ -95,4 +95,23 @@ module.exports = class DatabaseService {
         });
     }
 
+    /** find the record by ID and project the result.
+     * @param id id of the record to be found.
+     * @param projection projection of the result.
+     *
+     * @return Promise with the result if found, otherwise error. */
+    findAndProject(id, projection) {
+
+        return new Promise((resolve, reject) => {
+            try {
+                const cursor = this.collection.findOne({_id: require('mongodb').ObjectID(id)}, {
+                    projection: projection
+                });
+                resolve(cursor);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
 }

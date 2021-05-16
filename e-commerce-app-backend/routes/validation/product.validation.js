@@ -4,19 +4,12 @@
 */
 
 const path = require('path');
+const productAPI = require('../../api/product.api');
+const commonValidation = require('./common.validation');
 
-/** checks the _id is provided.
- * @return boolean if the product id is provided, return true. otherwise false. */
-const isProductIdProvided = async (product) => {
-    return new Promise((resolve, reject) => {
-        if (product?._id || product?._id === '' || product?._id >= 0) {
-            resolve(true);
-        } else {
-            reject(false);
-        }
-    });
-}
-
+/** check the given product id is valid or not.
+ * @returns string errorMessage variable will be an empty string if no errors found.
+ * */
 const isProductIdValid = (productID) => {
     /* Regular Expressions. */
     const idRegEx = /^[A-Za-z0-9]+$/;
@@ -41,7 +34,11 @@ const isProductIdValid = (productID) => {
     })
 }
 
-
+/** Check for a property called 'imagePath' in product object.
+ *
+ * @param product product object.
+ * @returns boolean returns true if the product object has a property called 'imagePath',
+ * otherwise false. */
 const isProductImagePathProvided = (product) => {
     return (product.hasOwnProperty('imagePath'));
 }
@@ -115,31 +112,28 @@ const validateProduct = (product) => {
     // }
 
     return errorMessage;
+};
+
+
+/** check for the product by URI.
+ * @param productURI
+ * @returns Promise with the product if found, otherwise reason. */
+const checkRecordByURI = async (productURI) => {
+    return await commonValidation.isEntityExists('products',
+        productURI,
+        productAPI.getProduct);
 }
+
+// const result = checkProductRecordExistsByURL('/products/609948da1cfac379e18794d7');
+// result.then(console.log).catch(console.error);
 
 
 module.exports = {
     validateProduct,
     isProductIdValid,
-    isProductImagePathProvided
+    isProductImagePathProvided,
+    checkRecordByURI,
 }
 
 
-// const testing =validateProduct({
-//     _id: '',
-//     name: '',
-//     description: '',
-//     unitPrice: 0,
-//     handOnQuantity: 0
-// });
-
-// const obj = {
-//     _id: "609945551cfac379e18794d4",
-//     name: 'keyboard',
-//     description: 'None',
-//     unitPrice: 15,
-//     handOnQuantity: 0,
-//     imagePath: ''
-// }
-// const testing = validateProduct(obj);
 
