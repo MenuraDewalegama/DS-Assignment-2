@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import ProductHolder from './product/productsHolder';
+import ProductHolder from './product/ProductsHolder';
 
 export default class Main extends React.Component {
 
