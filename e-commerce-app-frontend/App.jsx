@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './src/components/Navbar';
-import Main from './src/components/main';
+import Main from './src/components/Main';
 
 export default class App extends React.Component {
 
