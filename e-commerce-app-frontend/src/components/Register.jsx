@@ -1,28 +1,27 @@
-import React from 'React'
-import * as ReactBootStrap from 'react-bootstrap'
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
+import React from 'react';
+import * as ReactBootStrap from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 
-export default class App extends React.Component {
-
-
+export default class Register extends React.Component {
+    
     render() {
         return (
             <div className="container-sm">
-                <br />
+                <br/>
                 <h1>Register</h1>
 
-                <br />
-                <br />
+                <br/>
+                <br/>
                 <ReactBootStrap.Form>
                     <ReactBootStrap.Form.Group controlId="formBasicEmail">
                         <ReactBootStrap.Form.Label>Username</ReactBootStrap.Form.Label>
-                        <ReactBootStrap.Form.Control type="name" placeholder="Username" />
+                        <ReactBootStrap.Form.Control type="name" placeholder="Username"/>
                     </ReactBootStrap.Form.Group>
 
                     <ReactBootStrap.Form.Group controlId="formBasicPassword">
                         <ReactBootStrap.Form.Label>Password</ReactBootStrap.Form.Label>
-                        <ReactBootStrap.Form.Control type="password" placeholder="Password" />
+                        <ReactBootStrap.Form.Control type="password" placeholder="Password"/>
                     </ReactBootStrap.Form.Group>
 
                     <ReactBootStrap.Form.Group controlId="formGridState">
@@ -33,14 +32,14 @@ export default class App extends React.Component {
                         </ReactBootStrap.Form.Control>
                     </ReactBootStrap.Form.Group>
 
-                    <br />
+                    <br/>
                     <ReactBootStrap.Button variant="primary">
-                        <Link to="/user" style={{ textDecoration: 'none', color: "white" }}>Register</Link>
+                        <Link to="/user" style={{textDecoration: 'none', color: 'white'}}>Register</Link>
                     </ReactBootStrap.Button>
                 </ReactBootStrap.Form>
-                <br />
+                <br/>
 
-                <Link to="/login" style={{ textDecoration: 'none', color: "black" }}>Already have an account? Login</Link>
+                <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>Already have an account? Login</Link>
             </div>
         );
     }

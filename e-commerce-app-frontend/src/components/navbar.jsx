@@ -3,7 +3,7 @@ import * as ReactBootStrap from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link, NavLink } from 'react-router-dom'
 import Login from './login'
 import ProductsHolder from './product/productsHolder';
-import Register from './register';
+import Register from './Register';
 
 
 export default function ButtonAppBar() {
