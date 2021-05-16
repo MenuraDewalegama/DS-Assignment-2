@@ -2,7 +2,7 @@ import React from 'react';
 import * as ReactBootStrap from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link, NavLink } from 'react-router-dom'
 import Login from './login'
-import ProductsHolder from './product.components/productsHolder';
+import ProductsHolder from './product/productsHolder';
 import Register from './register';
 
 
