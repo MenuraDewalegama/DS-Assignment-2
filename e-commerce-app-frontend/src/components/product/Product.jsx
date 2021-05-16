@@ -2,11 +2,11 @@ import React from 'react';
 
 export default class Product extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
-        const { product } = this.props;
+        const {product} = this.props;
         return (
             <div>
                 <div>
