@@ -34,7 +34,8 @@ export default class Register extends React.Component {
 
                     <br/>
                     <ReactBootStrap.Button variant="primary">
-                        <Link to="/user" style={{textDecoration: 'none', color: 'white'}}>Register</Link>
+                        {/* // TODO: if registration successful, then redirect to root URL (/product). */}
+                        <Link to="/" style={{textDecoration: 'none', color: 'white'}}>Register</Link>
                     </ReactBootStrap.Button>
                 </ReactBootStrap.Form>
                 <br/>

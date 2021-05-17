@@ -19,6 +19,12 @@ export default class Products extends React.Component {
         const {products} = this.props;
         return (
             <div className="container-sm" style={{marginTop: '20px'}}>
+                {/* header. */}
+                <section className="products-header">
+                    <h2>Products</h2>
+                </section>
+
+                {/* display product item by item by looping through. */}
                 {products.map(product => {
                     return <ProductListItem
                         key={product.id.toString()} product={product}
