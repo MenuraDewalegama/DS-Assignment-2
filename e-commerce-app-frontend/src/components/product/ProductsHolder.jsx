@@ -1,10 +1,10 @@
 import React from 'react';
 import Products from './Products';
-import * as ReactBootStrap from 'react-bootstrap';
+import {Route, Switch} from 'react-router-dom';
+import AddEditProduct from './AddEditProduct';
 
-import {Link, Route, Switch} from 'react-router-dom';
-import AddProduct from './AddProduct';
-
+/* this product list will be removed as soon as possible,
+     when context API is implemented. */
 const products = [
     {
         id: 1,
@@ -25,33 +25,40 @@ const products = [
 export default class ProductsHolder extends React.Component {
     constructor(props) {
         super(props);
+
     }
 
+    /** this method is also temporary method. this will be removed as soon as possible,
+     when context API is implemented. */
     addNewProduct({name, description, price, quantity}) {
         products.push({id: products.length + 1, name, description, price, quantity});
+    }
+
+    /** temporary method to add a new product. */
+    addProduct(product) {
+        console.log('adding a new product -------------------------');
+        console.log(product);
+    }
+
+    /** temporary method to update the product. */
+    updateProduct(product) {
+        console.log('updating product -------------------------');
+        console.log(product);
     }
 
     render() {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/products">
+                        {/* products component. */}
                         <Products products={products}/>
                     </Route>
-                    <Route exact path="/user">
-                        <div className="container-sm" style={{marginTop: '50px'}}>
-                            <ReactBootStrap.Button variant="primary">
-                                <Link to="/user/add-product" style={{textDecoration: 'none', color: 'white'}}>Add</Link>
-                            </ReactBootStrap.Button>
-                        </div>
-                        <Products products={products}/>
-
-                    </Route>
-                    <Route path="/user/add-product">
-                        <AddProduct save={product => this.addNewProduct(product)}/>
-                    </Route>
+                    <Route exact path="/products/add"
+                           render={(props) => <AddEditProduct {...props} saveOrUpdate={this.addProduct}/>}/>
+                    <Route exact path="/products/:productID/edit"
+                           render={(props) => <AddEditProduct {...props} saveOrUpdate={this.updateProduct}/>}/>
                 </Switch>
-
             </div>
         );
     }
