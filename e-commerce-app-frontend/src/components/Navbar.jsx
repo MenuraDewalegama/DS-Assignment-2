@@ -3,6 +3,10 @@ import * as ReactBootStrap from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './login/Login';
 import Register from './register/Register';
+import { Cart2 } from 'react-bootstrap-icons';
+import { Person } from 'react-bootstrap-icons';
+import { House } from 'react-bootstrap-icons';
+
 
 
 export default class ButtonAppBar extends Component {
@@ -14,10 +18,11 @@ export default class ButtonAppBar extends Component {
                     <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
                         <ReactBootStrap.Nav className="mr-auto">
-                            <Link to="/" className="nav-link">Home</Link>
+                            <Link to="/" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <House color="white" size={40} /> </ReactBootStrap.Badge></Link>
                         </ReactBootStrap.Nav>
                         <ReactBootStrap.Nav>
-                            <Link to="/login" className="nav-link">Login</Link>
+                            <Link to="/login" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
+                            <Link to="/login" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Person color="white" size={40} /></ReactBootStrap.Badge> </Link>
                         </ReactBootStrap.Nav>
                     </ReactBootStrap.Navbar.Collapse>
                 </ReactBootStrap.Navbar>
