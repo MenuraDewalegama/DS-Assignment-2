@@ -10,7 +10,7 @@ import {printErrorResponse} from './error.service';
 /** Call the auth API and get a token using userID and password.
  * @param userID user's ID
  * @param password password of the user.
- * @return Promise with result. */
+ * @return Promise with result. if auth success then resolves true, otherwise reject error. */
 const authenticate = ({userID, password}) => {
     const body = {
         username: userID,
@@ -51,10 +51,12 @@ const authenticate = ({userID, password}) => {
 };
 
 
-/** Get user by userID by calling backend services. */
+/** Get user by userID by calling backend services.
+ * @param userID ID of the user to be retrieved.
+ * @return Promise with result. if success then resolves the user data, otherwise reject the error. */
 const getUserByID = (userID) => {
     return new Promise((resolve, reject) => {
-        axios.get(`${process.env.ECOMMERCE_BACKEND_API_URL}/users`).then(response => {
+        axios.get(`${process.env.ECOMMERCE_BACKEND_API_URL}/users/${userID}`).then(response => {
             if (response.status === 200) {
                 console.log(response.data);
                 resolve(response.data);
