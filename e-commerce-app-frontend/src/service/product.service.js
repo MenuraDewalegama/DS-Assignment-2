@@ -17,6 +17,21 @@ const getAllProducts = () => {
     });
 };
 
+
+/** Get product by productID by calling backend services. */
+const getProductByID = (productID) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await axios.get(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${productID}`);
+            resolve(result);
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+
 module.exports = {
-    getAllProducts
+    getAllProducts,
+    getProductByID,
 };
