@@ -116,6 +116,15 @@ const updateProduct = (product) => {
 };
 
 
+/** Delete a product by ProductID by using backend services.
+ * @param productID ID of the product to be deleted.
+ * @return Promise promise with a result. */
+const deleteProduct = (productID) => {
+    /* send a delete request to the backend using axios. */
+    const result = axios.delete(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${productID}`);
+};
+
+
 /** Creates a new FormData object and append product object properties accordingly.
  * @param isAdding boolean, if true formData object will be ready for adding a new product.
  * otherwise, formData object will be ready for update a product record.
@@ -155,4 +164,5 @@ module.exports = {
     getProductByID,
     saveProduct,
     updateProduct,
+    deleteProduct
 };
