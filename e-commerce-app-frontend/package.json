@@ -10,7 +10,9 @@
   "author": "2021S1_JUNE_WE_05",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.0",
+    "crypto-js": "^4.0.0",
     "parcel": "^2.0.0-beta.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
