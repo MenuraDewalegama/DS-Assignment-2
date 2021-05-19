@@ -15,8 +15,7 @@ export default function ProductListItem(props) {
                     <ReactBootStrap.Card.Text>{product.description}</ReactBootStrap.Card.Text>
                     <ReactBootStrap.Card.Text>{product.price}</ReactBootStrap.Card.Text>
                     <ReactBootStrap.Card.Text>{product.quantity}</ReactBootStrap.Card.Text>
-                    <ReactBootStrap.Button variant="primary" onClick={() => selectProduct(product)}>Go
-                        somewhere</ReactBootStrap.Button>
+                    <ReactBootStrap.Button variant="primary" onClick={() => selectProduct(product)}>Add to cart</ReactBootStrap.Button>
                 </ReactBootStrap.Card.Body>
             </ReactBootStrap.Card>
         </div>

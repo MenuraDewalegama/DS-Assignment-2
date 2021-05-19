@@ -3,9 +3,14 @@ import * as ReactBootStrap from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './login/Login';
 import Register from './register/Register';
+import Cart from './/cart/Cart';
+
 import { Cart2 } from 'react-bootstrap-icons';
 import { Person } from 'react-bootstrap-icons';
 import { House } from 'react-bootstrap-icons';
+import Delivery from './delivery/Delivery';
+import Credit from './payment/Credit';
+import Mobile from './payment/Mobile';
 
 
 
@@ -21,7 +26,7 @@ export default class ButtonAppBar extends Component {
                             <Link to="/" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <House color="white" size={40} /> </ReactBootStrap.Badge></Link>
                         </ReactBootStrap.Nav>
                         <ReactBootStrap.Nav>
-                            <Link to="/login" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
+                            <Link to="/cart" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
                             <Link to="/login" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Person color="white" size={40} /></ReactBootStrap.Badge> </Link>
                         </ReactBootStrap.Nav>
                     </ReactBootStrap.Navbar.Collapse>
@@ -37,7 +42,21 @@ export default class ButtonAppBar extends Component {
                     <Route path="/register">
                         <Register/>
                     </Route>
+                    <Route path="/cart">
+                        <Cart/>
+                    </Route>
+                    <Route path="/delivery">
+                        <Delivery/>
+                    </Route>
+                    <Route path="/mobile">
+                        <Mobile/>
+                    </Route>
+                    <Route path="/credit">
+                        <Credit/>
+                    </Route>
                 </Switch>
+
+
             </div>
         );
     }
