@@ -15,6 +15,13 @@ import Mobile from './payment/Mobile';
 
 
 export default class ButtonAppBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userStatus: true
+        };
+    };
+
     render() {
         return (
             <div>
@@ -25,10 +32,27 @@ export default class ButtonAppBar extends Component {
                         <ReactBootStrap.Nav className="mr-auto">
                             <Link to="/" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <House color="white" size={40} /> </ReactBootStrap.Badge></Link>
                         </ReactBootStrap.Nav>
-                        <ReactBootStrap.Nav>
+                      
+                       
+ 
+
+                       
+                            {     //if user loged in
+                            (true) ?  
+                            <ReactBootStrap.Nav>
                             <Link to="/cart" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
-                            <Link to="/login" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Person color="white" size={40} /></ReactBootStrap.Badge> </Link>
-                        </ReactBootStrap.Nav>
+                            <Link to="/login" className="nav-link">Logut </Link>
+                            </ReactBootStrap.Nav>
+
+                           //if user not logged in
+                           
+                           :  <ReactBootStrap.Nav>  
+                           <Link to="/login" className="nav-link"> Login  </Link>
+
+                           <Link to="/register" className="nav-link"> Register  </Link>
+
+                        </ReactBootStrap.Nav>}
+
                     </ReactBootStrap.Navbar.Collapse>
                 </ReactBootStrap.Navbar>
 
