@@ -67,8 +67,25 @@ const getUserByID = (userID) => {
     });
 };
 
+/** User registration(Add a new user) by calling backend services.
+ * @param user user object containing values.
+ * @return Promise a promise with a result. If successful then, resolve the response,
+ * otherwise reject the error. */
+const addUser = (user) => {
+    return new Promise((resolve, reject) => {
+        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}/users`, {
+            data: JSON.stringify(user)
+        }).then(response => {
+            resolve(response);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+};
+
 
 module.exports = {
+    authenticate,
     getUserByID,
-    authenticate
+    addUser
 };
