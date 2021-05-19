@@ -34,6 +34,7 @@ if (!fs.existsSync(productsDir)) {
 
 /* routes. */
 // static contents are handle by AssetsRoutes
+const AuthRoutes = require('../e-commerce-app-backend/routes/auth.routes');
 const AssetsRoutes = require('../e-commerce-app-backend/routes/asset.routes');
 const CartRoutes = require('../e-commerce-app-backend/routes/cart.routes');
 const ProductRoutes = require('../e-commerce-app-backend/routes/product.routes');
@@ -41,7 +42,9 @@ const UserRoutes = require('../e-commerce-app-backend/routes/user.routes');
 const OrderRoutes = require('../e-commerce-app-backend/routes/order.routes');
 
 
+app.use(AuthRoutes.routes()).use(AuthRoutes.allowedMethods());
 app.use(AssetsRoutes.routes()).use(AssetsRoutes.allowedMethods());
+/* JWT protected routes should place user this line. */
 app.use(CartRoutes.routes()).use(CartRoutes.allowedMethods());
 app.use(ProductRoutes.routes()).use(ProductRoutes.allowedMethods());
 app.use(UserRoutes.routes()).use(UserRoutes.allowedMethods());

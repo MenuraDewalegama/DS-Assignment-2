@@ -12,3 +12,6 @@ const router = new Router({
 router.post('/', ctx => {
     console.log(ctx);
 });
+
+
+module.exports = router;
