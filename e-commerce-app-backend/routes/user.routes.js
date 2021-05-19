@@ -6,12 +6,13 @@
 const Router = require('@koa/router');
 
 const router = new Router({
-    prefix: "/users"
+    prefix: '/users'
 });
 
 const {getAllUsers, getUser, addUser, updateUser, deleteUser} = require('../api/user.api');
 const userValidation = require('./validation/user.validation');
 const commonValidation = require('./validation/common.validation');
+const passwordService = require('../service/password.service');
 
 /** get all users. */
 router.get('/', async (ctx) => {
@@ -58,6 +59,8 @@ router.get('/:id', async (ctx) => {
 /** add a user. */
 router.post('/', async (ctx) => {
     const user = ctx.request.body;
+    /* This variable holds the encoded user password. */
+    let hashedPassword;
 
     /* validate user input. */
     const validationResult = userValidation.validateUser(user);
@@ -68,17 +71,25 @@ router.post('/', async (ctx) => {
         return;
     }
 
+    try {
+        hashedPassword = await passwordService.getEncryptedPassword(user.password);
+    } catch (error) {
+        ctx.response.status = 500; // internal server error.
+        console.error(error);
+        return;
+    }
+
     try { /* add the user. */
         const generatedResult = await addUser({
             name: user.name,
             contactNo: user.contactNo,
-            password: user.password, // TODO: encrypt the password
+            password: hashedPassword,
             type: user.type
         });
         ctx.response.type = 'application/json';
         ctx.response.status = 201; // created
         ctx.response.body = {
-            "generatedId": generatedResult.insertedId
+            'generatedId': generatedResult.insertedId
         };
 
     } catch (error) {
@@ -91,6 +102,8 @@ router.post('/', async (ctx) => {
 /** update a user. */
 router.put('/:id', async (ctx) => {
     const id = ctx.request.params.id;
+    /* This variable holds the encoded user password. */
+    let hashedPassword;
 
     /* validate input. */
     const validationResult = commonValidation.validateID(id);
@@ -111,11 +124,19 @@ router.put('/:id', async (ctx) => {
     /* read the request body and get the user details. */
     let user = ctx.request.body;
 
+    try {
+        hashedPassword = await passwordService.getEncryptedPassword(user.password);
+    } catch (error) {
+        ctx.response.status = 500; // internal server error.
+        console.error(error);
+        return;
+    }
+
     try { /* update the product. */
         const result = await updateUser(id, {
             name: user.name,
             contactNo: user.contactNo,
-            password: user.password, // TODO: encrypt the password
+            password: hashedPassword,
             type: user.type
         });
         ctx.response.status = 204;
