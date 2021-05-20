@@ -1,55 +1,54 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
-import { Link, Route, Switch } from 'react-router-dom';
+import {Button, Card, Col, Row} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
+/* TODO: this will be removed. */
 export const cartList = [];
 
 export default function ProductListItem(props) {
 
+    const {product, selectProduct} = props;
 
-    const { product, selectProduct } = props;
-
-
-
-    const clickOnAddtoCart = () => {
+    const onClickAddToCart = () => {
         cartList.push(product);
         console.log(cartList);
-    }
-
+    };
 
     return (
+        <div style={{marginRight: '5%'}}>
+            <br/>
+            <Row>
+                <Col>
+                    <Card style={{width: '18rem'}}>
+                        <Card.Img variant="top" src="https://via.placeholder.com/300"/>
+                        <Card.Body>
+                            <Card.Title>Name: {product.name}</Card.Title>
+                            <Card.Text>Description: {product.description}</Card.Text>
+                            <Card.Text>Price: {product.price}</Card.Text>
+                            <Card.Text>Qty: {product.quantity}</Card.Text>
 
-        <div style={{ marginRight: '5%' }}>
-            <br />
-            <ReactBootStrap.Row>
-                <ReactBootStrap.Col >
+                            <Row>
 
-                    <ReactBootStrap.Card style={{ width: '18rem' }}>
-                        <ReactBootStrap.Card.Img variant="top" src="https://via.placeholder.com/300" />
-                        <ReactBootStrap.Card.Body>
-                            <ReactBootStrap.Card.Title>Name: {product.name}</ReactBootStrap.Card.Title>
-                            <ReactBootStrap.Card.Text>Description: {product.description}</ReactBootStrap.Card.Text>
-                            <ReactBootStrap.Card.Text>Price: {product.price}</ReactBootStrap.Card.Text>
-                            <ReactBootStrap.Card.Text>Qty: {product.quantity}</ReactBootStrap.Card.Text>
+                                {   // product edit button
+                                    (true) ? <Button style={{margin: 'auto'}} variant="primary"
+                                                     onClick={() => selectProduct(product)}>Edit
+                                        Item</Button> : ''}
 
-                            <ReactBootStrap.Row >
+                                <Link to="/cart" style={{color: 'white', margin: 'auto'}}>
+                                    <Button variant="primary"
+                                            onClick={() => {
+                                                selectProduct(product);
+                                                onClickAddToCart(product);
+                                            }}
+                                    >Add to cart
+                                    </Button>
+                                </Link>
+                            </Row>
+                        </Card.Body>
+                    </Card>
 
-
-                                {(true) ? <ReactBootStrap.Button style={{ margin: 'auto' }} variant="primary" onClick={() => selectProduct(product)}>Edit Item</ReactBootStrap.Button> : <div></div>}
-
-
-
-                                <ReactBootStrap.Button id='btn' style={{ margin: 'auto' }} variant="primary" onClick={() => {
-                                    selectProduct(product)
-                                    clickOnAddtoCart(product)
-                                }}><Link to="/cart" style={{ color: 'white' }}>Add to cart</Link></ReactBootStrap.Button>
-                            </ReactBootStrap.Row>
-
-                        </ReactBootStrap.Card.Body>
-                    </ReactBootStrap.Card>
-
-                </ReactBootStrap.Col>
-            </ReactBootStrap.Row>
+                </Col>
+            </Row>
 
 
         </div>

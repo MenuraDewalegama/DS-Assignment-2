@@ -39,6 +39,6 @@ Prompt.defaultProps = {
     message: 'Action is not completed successfully!',
     redirectTo: '/',
     redirectPageName: 'Main'
-}
+};
 
 export default Prompt;
