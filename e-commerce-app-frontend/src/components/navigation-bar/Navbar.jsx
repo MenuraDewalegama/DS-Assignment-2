@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Badge, Button, Nav, Navbar} from 'react-bootstrap';
+import {Button, Nav, Navbar} from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
-import {Cart2, House} from 'react-bootstrap-icons';
+import {Cart2} from 'react-bootstrap-icons';
 import './Nabar.css';
 
 /* components. */
@@ -24,15 +24,18 @@ export default class ButtonAppBar extends Component {
         return (
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand>E-Commerce App</Navbar.Brand>
+                    <Link to="/" className="nav-link">
+                        <Navbar.Brand>E-Commerce App</Navbar.Brand>
+                    </Link>
+
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Link to="/" className="nav-link">
-                                <Badge variant="secondary">
-                                    <House color="white" size={40}/>
-                                </Badge>
-                            </Link>
+                            {/*<Link to="/" className="nav-link">*/}
+                            {/*    <Badge variant="secondary">*/}
+                            {/*        <House color="white" size={40}/>*/}
+                            {/*    </Badge>*/}
+                            {/*</Link>*/}
                         </Nav>
 
                         {     // if user logged in
