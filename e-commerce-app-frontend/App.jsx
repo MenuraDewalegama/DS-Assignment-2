@@ -9,7 +9,7 @@ export default class App extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route path='/'>
+                    <Route path="/">
                         {/* navigation bar component. */}
                         <Navbar/>
                         {/* main component. */}

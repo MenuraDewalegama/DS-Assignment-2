@@ -1,9 +1,7 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
+import {Button, Form} from 'react-bootstrap';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import User from '../User';
 import Register from '../register/Register';
-
 
 export default class Login extends React.Component {
 
@@ -15,10 +13,11 @@ export default class Login extends React.Component {
         };
     }
 
+    /* keep track of changes of the form field values. */
     onChange(event) {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-        console.log(value)
+        const {name, value} = event.target;
+        this.setState({[name]: value});
+        console.log(value);
     }
 
     render() {
@@ -27,34 +26,34 @@ export default class Login extends React.Component {
                 <div className="container-sm">
                     <br/>
                     <h1>Login</h1>
+                    <br/><br/>
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control name="username" value={this.state.username} type="name"
+                                          onChange={event => this.onChange(event)}
+                                          placeholder="Username"/>
+                        </Form.Group>
 
-                    <br/>
-                    <br/>
-                    <ReactBootStrap.Form>
-                        <ReactBootStrap.Form.Group controlId="formBasicEmail">
-                            <ReactBootStrap.Form.Label>Username</ReactBootStrap.Form.Label>
-                            <ReactBootStrap.Form.Control name="username" value={this.state.username} type="name" onChange={event => this.onChange(event)}  placeholder="Username"/>
-                        </ReactBootStrap.Form.Group>
-
-                        <ReactBootStrap.Form.Group controlId="formBasicPassword">
-                            <ReactBootStrap.Form.Label>Password</ReactBootStrap.Form.Label>
-                            <ReactBootStrap.Form.Control name="password" value={this.state.password} type="password" onChange={event => this.onChange(event)}  placeholder="Password"/>
-                        </ReactBootStrap.Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control name="password" value={this.state.password} type="password"
+                                          onChange={event => this.onChange(event)}
+                                          placeholder="Password"/>
+                        </Form.Group>
                         <br/>
-                        <ReactBootStrap.Button variant="primary">
-                            <Link to="/"     style={{textDecoration: 'none', color: 'white'}} >Login</Link>
-                        </ReactBootStrap.Button>
-                    </ReactBootStrap.Form>
+                        <Button variant="primary">
+                            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>Login</Link>
+                        </Button>
+                    </Form>
                     <br/>
                     <Link to="/register" style={{textDecoration: 'none', color: 'black'}}>Don't have an account?
                         Register</Link>
-
                 </div>
 
-
+                {/* router */}
                 <Router>
                     <Switch>
-                        {/*<Route exact path="/user"/>*/}
                         <Route path="/register" component={Register}/>
                     </Switch>
                 </Router>
