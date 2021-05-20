@@ -39,7 +39,7 @@ export default class ButtonAppBar extends Component {
                         </Nav>
 
                         {     // if user logged in
-                            (false) ?
+                            (true) ?
                                 <Nav>
                                     <h5 className="user_name">Hi User!</h5>
                                     <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
