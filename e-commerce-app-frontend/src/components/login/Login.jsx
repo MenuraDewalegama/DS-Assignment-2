@@ -9,6 +9,16 @@ export default class Login extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            username: '',
+            password: ''
+        };
+    }
+
+    onChange(event) {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+        console.log(value)
     }
 
     render() {
@@ -23,16 +33,16 @@ export default class Login extends React.Component {
                     <ReactBootStrap.Form>
                         <ReactBootStrap.Form.Group controlId="formBasicEmail">
                             <ReactBootStrap.Form.Label>Username</ReactBootStrap.Form.Label>
-                            <ReactBootStrap.Form.Control type="name" placeholder="Username"/>
+                            <ReactBootStrap.Form.Control name="username" value={this.state.username} type="name" onChange={event => this.onChange(event)}  placeholder="Username"/>
                         </ReactBootStrap.Form.Group>
 
                         <ReactBootStrap.Form.Group controlId="formBasicPassword">
                             <ReactBootStrap.Form.Label>Password</ReactBootStrap.Form.Label>
-                            <ReactBootStrap.Form.Control type="password" placeholder="Password"/>
+                            <ReactBootStrap.Form.Control name="password" value={this.state.password} type="password" onChange={event => this.onChange(event)}  placeholder="Password"/>
                         </ReactBootStrap.Form.Group>
                         <br/>
                         <ReactBootStrap.Button variant="primary">
-                            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>Login</Link>
+                            <Link to="/"     style={{textDecoration: 'none', color: 'white'}} >Login</Link>
                         </ReactBootStrap.Button>
                     </ReactBootStrap.Form>
                     <br/>
