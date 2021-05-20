@@ -76,6 +76,26 @@ class ProductProvider extends Component {
         });
     }
 
+    /** Add a new product. */
+    addProduct(product) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await ProductService.saveProduct(product);
+                if (response.status === 201) {
+                    /* 201 -  created. */
+                    const responseResultObject = JSON.parse(response.data);
+                    this.setState((prevState) =>
+                        prevState.products.unshift({
+                            ...product,
+                            id: responseResultObject?.generatedId
+                        }));
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
