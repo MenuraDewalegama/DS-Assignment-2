@@ -124,6 +124,33 @@ class ProductProvider extends Component {
         });
     }
 
+    /** Delete a product by ProductID by using backend services.
+     * @param productID ID of the product to be deleted.
+     * @return Promise promise with a result. */
+    deleteProduct(productID) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await ProductService.deleteProduct(productID);
+                if (response.status === 204) {
+                    /* 204 - NO CONTENT - Deletion successful. */
+                    /* get the products array. */
+                    const productsArr = [...this.state.products];
+                    /* find the index of the updated product element/object. */
+                    const indexOfProduct = productsArr.findIndex((productElem, index) => productElem.id === product.id);
+                    /* replace the updated product with the old one. */
+                    productsArr.splice(indexOfProduct, 1);
+
+                    this.setState((prevValue => {
+                        prevValue.products = productsArr;
+                    }));
+                    resolve(true);
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
