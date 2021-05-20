@@ -15,11 +15,14 @@ export default function ProductListItem(props) {
 
     const {product, selectProduct} = props;
     let history = useHistory();
+
+    /* add the product in to cart. */
     const onClickAddToCart = () => {
         cartList.push(product);
         console.log(cartList);
     };
 
+    /** redirecting to the edit page,using product ID. */
     const redirectToEdit = () => {
         history.push(`/products/${product.id}/edit`);
     };

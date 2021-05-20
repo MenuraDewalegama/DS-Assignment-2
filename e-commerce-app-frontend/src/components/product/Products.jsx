@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductListItem from './ProductListItem';
 import {Button, Col, Container, Row} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 export default class Products extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export default class Products extends React.Component {
                             justifyContent: 'flex-end',
                             justifyItems: 'center'
                         }}>
-                            {(true) ? < Button > Add < /Button> : ""}
+                            {(true) ? <Link to="/products/add">< Button> Add < /Button></Link> : ""}
                         </Col>
                     </Row>
 
