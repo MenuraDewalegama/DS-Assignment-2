@@ -49,6 +49,33 @@ class ProductProvider extends Component {
     }
 
 
+    /** Get the product by its productID.
+     * @param  productID id of the product.
+     * @return Promise with a result. If success, then resolve the product.
+     * otherwise, reject the error(errorRespond) */
+    getProductByID(productID) {
+        return new Promise(async (resolve, reject) => {
+
+            const requestedProduct = this.state.products.filter(value => value.id === productID);
+            if (requestedProduct) {
+                resolve(requestedProduct);
+            } else {
+                try {
+                    const response = await ProductService.getProductByID(productID);
+                    /* if matching record found. then resolve it. */
+                    if (response.status === 200) {
+                        /* 200 - OK. */
+                        const retrievedProduct = JSON.parse(response.data);
+                        this.setState(((prevState) => prevState.products.unshift(retrievedProduct)));
+                        resolve(retrievedProduct);
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
