@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container, Form, Image} from 'react-bootstrap';
+import {Button, Container, Row, Col, Form, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Prompt from '../prompt/Prompt';
 
@@ -136,20 +136,16 @@ export default class AddEditProduct extends React.Component {
 
         return (
             <div>
-                <div className="container-sm" style={{marginTop: '50px'}}>
-                    <section>
-                        {(this.state.isAdding) ?
-                            < h2>Add New Product</h2> : <h2>Edit Product</h2>
-                        }
-                    </section>
-
-                    {/* button to go back to products. */}
-                    <div>
-                        <Button variant="primary">
-                            <Link to="/products"
-                                  style={{textDecoration: 'none', color: 'white'}}>Products</Link>
-                        </Button>
-                    </div>
+                <div className="container-sm" style={{padding: '2rem 0'}}>
+                    <Container className="p-0">
+                        <Row>
+                            <Col>
+                                {(this.state.isAdding) ?
+                                    < h2>Add New Product</h2> : <h2>Edit Product</h2>
+                                }
+                            </Col>
+                        </Row>
+                    </Container>
 
                     <div style={{marginTop: '20px'}}>
                         <Form>
@@ -157,8 +153,8 @@ export default class AddEditProduct extends React.Component {
                             <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" name="name" placeholder="Name"
-                                                             value={this.state.name}
-                                                             onChange={event => this.onChange(event)}/>
+                                              value={this.state.name}
+                                              onChange={event => this.onChange(event)}/>
                             </Form.Group>
 
                             <Form.Group controlId="formBasicDescription">
@@ -218,17 +214,33 @@ export default class AddEditProduct extends React.Component {
                             <br/>
 
                             <Container style={{padding: 0}}>
-                                <Button style={{marginRight: '1.2rem'}} variant="primary"
-                                        onClick={event => {
-                                            event.preventDefault();
+                                <Row>
+                                    <Col>
+                                        <Button style={{marginRight: '1.2rem'}} variant="primary"
+                                                onClick={event => {
+                                                    event.preventDefault();
 
-                                            /* perform save or update operation. */
-                                            this.performSaveOrUpdate(saveOrUpdate);
+                                                    /* perform save or update operation. */
+                                                    this.performSaveOrUpdate(saveOrUpdate);
 
-                                        }}>{
-                                    (this.state.isAdding) ? 'Save' : 'Edit'
-                                }
-                                </Button>
+                                                }}>{
+                                            (this.state.isAdding) ? 'Save' : 'Edit'
+                                        }
+                                        </Button>
+                                    </Col>
+                                    <Col style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'flex-end',
+                                        justifyItems: 'center'
+                                    }}>
+                                        <Button variant="primary">
+                                            <Link to="/products"
+                                                  style={{textDecoration: 'none', color: 'white'}}>Cancel</Link>
+                                        </Button>
+                                    </Col>
+                                </Row>
+
                                 {/*<ReactBootStrap.Button variant="secondary" as="input" type="reset" value="Reset"/>*/}
                             </Container>
                         </Form>
