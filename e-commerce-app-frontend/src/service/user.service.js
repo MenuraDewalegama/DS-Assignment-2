@@ -37,8 +37,8 @@ const authenticate = ({userID, password}) => {
                     sessionStorage.setItem(sha256(process.env.AUTHENTICATED_USER_ID),
                         btoa(JSON.stringify(authUser.id)));
                     /* store current authenticated user name in session storage. */
-                    sessionStorage.setItem(sha256(process.env.AUTHENTICATED_USER_NAME),
-                        btoa(JSON.stringify(authUser.name)));
+                    // sessionStorage.setItem(sha256(process.env.AUTHENTICATED_USER_NAME),
+                    //     btoa(JSON.stringify(authUser.name)));
                     resolve(true);
                 }).catch((error) => {
                     printErrorResponse(error);
