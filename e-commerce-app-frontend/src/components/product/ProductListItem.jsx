@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Card, Col, Row} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 /* TODO: this will be removed. */
 export const cartList = [];
@@ -8,11 +8,16 @@ export const cartList = [];
 export default function ProductListItem(props) {
 
     const {product, selectProduct} = props;
-
+    let history = useHistory();
     const onClickAddToCart = () => {
         cartList.push(product);
         console.log(cartList);
     };
+
+    const redirectToEdit = () => {
+        history.push(`/products/${product.id}/edit`);
+    };
+
 
     return (
         <div style={{marginRight: '5%'}}>
@@ -31,7 +36,10 @@ export default function ProductListItem(props) {
 
                                 {   // product edit button
                                     (true) ? <Button style={{margin: 'auto'}} variant="primary"
-                                                     onClick={() => selectProduct(product)}>Edit
+                                                     onClick={() => {
+                                                         selectProduct(product);
+                                                         redirectToEdit();
+                                                     }}>Edit
                                         Item</Button> : ''}
 
                                 <Link to="/cart" style={{color: 'white', margin: 'auto'}}>

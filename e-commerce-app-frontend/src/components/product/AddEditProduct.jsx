@@ -155,8 +155,8 @@ export default class AddEditProduct extends React.Component {
                         <Form>
 
                             <Form.Group controlId="formBasicName">
-                                <ReactBootStrap.Form.Label>Name</ReactBootStrap.Form.Label>
-                                <ReactBootStrap.Form.Control type="text" name="name" placeholder="Name"
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" name="name" placeholder="Name"
                                                              value={this.state.name}
                                                              onChange={event => this.onChange(event)}/>
                             </Form.Group>
