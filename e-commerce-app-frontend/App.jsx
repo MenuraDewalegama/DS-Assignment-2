@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './src/components/Navbar';
+import Navbar from './src/components/navigation-bar/Navbar';
 import Main from './src/components/Main';
 
 export default class App extends React.Component {
@@ -9,7 +9,7 @@ export default class App extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route path='/'>
+                    <Route path="/">
                         {/* navigation bar component. */}
                         <Navbar/>
                         {/* main component. */}

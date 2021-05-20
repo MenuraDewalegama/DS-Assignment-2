@@ -1,9 +1,7 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
-import {Image} from 'react-bootstrap';
+import {Button, Container, Form, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Prompt from '../prompt/Prompt';
-
 
 export default class AddEditProduct extends React.Component {
 
@@ -147,101 +145,97 @@ export default class AddEditProduct extends React.Component {
 
                     {/* button to go back to products. */}
                     <div>
-                        <ReactBootStrap.Button variant="primary">
+                        <Button variant="primary">
                             <Link to="/products"
                                   style={{textDecoration: 'none', color: 'white'}}>Products</Link>
-                        </ReactBootStrap.Button>
+                        </Button>
                     </div>
 
                     <div style={{marginTop: '20px'}}>
-                        <ReactBootStrap.Form>
+                        <Form>
 
-                            <ReactBootStrap.Form.Group controlId="formBasicName">
+                            <Form.Group controlId="formBasicName">
                                 <ReactBootStrap.Form.Label>Name</ReactBootStrap.Form.Label>
                                 <ReactBootStrap.Form.Control type="text" name="name" placeholder="Name"
                                                              value={this.state.name}
                                                              onChange={event => this.onChange(event)}/>
-                            </ReactBootStrap.Form.Group>
+                            </Form.Group>
 
-                            <ReactBootStrap.Form.Group controlId="formBasicDescription">
-                                <ReactBootStrap.Form.Label>Description</ReactBootStrap.Form.Label>
-                                <ReactBootStrap.Form.Control type="text" name="description"
-                                                             placeholder="Description"
-                                                             value={this.state.description}
-                                                             onChange={event => this.onChange(event)}/>
-                            </ReactBootStrap.Form.Group>
+                            <Form.Group controlId="formBasicDescription">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control type="text" name="description"
+                                              placeholder="Description"
+                                              value={this.state.description}
+                                              onChange={event => this.onChange(event)}/>
+                            </Form.Group>
 
-                            <ReactBootStrap.Form.Group controlId="formBasicPrice">
-                                <ReactBootStrap.Form.Label>Unit Price</ReactBootStrap.Form.Label>
-                                <ReactBootStrap.Form.Control type="text" name="unitPrice" placeholder="Unit Price"
-                                                             value={this.state.unitPrice}
-                                                             pattern="^\d*(\.\d{0,2})?$"
-                                                             onChange={event => this.onChange(event)}/>
-                            </ReactBootStrap.Form.Group>
+                            <Form.Group controlId="formBasicPrice">
+                                <Form.Label>Unit Price</Form.Label>
+                                <Form.Control type="text" name="unitPrice" placeholder="Unit Price"
+                                              value={this.state.unitPrice}
+                                              pattern="^\d*(\.\d{0,2})?$"
+                                              onChange={event => this.onChange(event)}/>
+                            </Form.Group>
 
-                            <ReactBootStrap.Form.Group controlId="formBasicQuantity">
-                                <ReactBootStrap.Form.Label>Quantity</ReactBootStrap.Form.Label>
-                                <ReactBootStrap.Form.Control type="text" name="quantity"
-                                                             placeholder="Quantity"
-                                                             value={this.state.quantity}
-                                                             onChange={event => this.onChange(event)}/>
-                            </ReactBootStrap.Form.Group>
+                            <Form.Group controlId="formBasicQuantity">
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control type="text" name="quantity"
+                                              placeholder="Quantity"
+                                              value={this.state.quantity}
+                                              onChange={event => this.onChange(event)}/>
+                            </Form.Group>
 
 
-                            <ReactBootStrap.Form.Group controlId="formProductImage">
-                                <ReactBootStrap.Container style={{padding: 0, marginTop: '1.5rem'}}
-                                                          className="productImageContainer">
+                            <Form.Group controlId="formProductImage">
+                                <Container style={{padding: 0, marginTop: '1.5rem'}}
+                                           className="productImageContainer">
                                     {(this.state.isAdding) ? '' :
                                         <><Image
                                             src={(this.state?.imagePath) ?
                                                 `http://localhost:3000${this.state.imagePath}` :
                                                 `https://via.placeholder.com/300`}
                                             alt={`${this.state.name} product image`}
-                                            rounded
-                                        />
+                                            rounded/>
 
                                             <div>
-                                                <ReactBootStrap.Button variant="secondary"
-                                                                       style={{
-                                                                           marginTop: '1.2rem'
-                                                                       }}
-                                                                       onClick={this.removeImagePath.bind(this)}
-                                                >Remove Image</ReactBootStrap.Button>
+                                                <Button variant="secondary"
+                                                        style={{
+                                                            marginTop: '1.2rem'
+                                                        }}
+                                                        onClick={this.removeImagePath.bind(this)}>Remove Image</Button>
                                             </div>
                                         </>
                                     }
-                                </ReactBootStrap.Container>
+                                </Container>
 
                                 <br/>
 
-                                <ReactBootStrap.Form.File id="id_productImage"
-                                                          label="Upload Product Image"
-                                                          onChange={event => this.onChangeProductFormFile(event)}
-                                />
-                            </ReactBootStrap.Form.Group>
+                                <Form.File id="id_productImage"
+                                           label="Upload Product Image"
+                                           onChange={event => this.onChangeProductFormFile(event)}/>
+                            </Form.Group>
 
                             <br/>
 
-                            <ReactBootStrap.Container style={{padding: 0}}>
-                                <ReactBootStrap.Button style={{marginRight: '1.2rem'}} variant="primary"
-                                                       onClick={event => {
-                                                           event.preventDefault();
+                            <Container style={{padding: 0}}>
+                                <Button style={{marginRight: '1.2rem'}} variant="primary"
+                                        onClick={event => {
+                                            event.preventDefault();
 
-                                                           /* perform save or update operation. */
-                                                           this.performSaveOrUpdate(saveOrUpdate);
+                                            /* perform save or update operation. */
+                                            this.performSaveOrUpdate(saveOrUpdate);
 
-                                                       }}>{
+                                        }}>{
                                     (this.state.isAdding) ? 'Save' : 'Edit'
                                 }
-                                </ReactBootStrap.Button>
+                                </Button>
                                 {/*<ReactBootStrap.Button variant="secondary" as="input" type="reset" value="Reset"/>*/}
-                            </ReactBootStrap.Container>
-                        </ReactBootStrap.Form>
+                            </Container>
+                        </Form>
                     </div>
                 </div>
             </div>
         );
-
     }
 
 }

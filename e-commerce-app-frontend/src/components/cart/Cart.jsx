@@ -1,9 +1,8 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import Register from '../register/Register';
+import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
-
+/* This will be removed, soon.*/
 const cartItems = [
     {
         id: 1,
@@ -31,17 +30,12 @@ export default class Cart extends React.Component {
         return (
             <div>
                 <h1>This is the cart page</h1>
-                <ReactBootStrap.Button variant="primary">
-                    <Link to="/delivery" style={{ textDecoration: 'none', color: 'white' }}>Confirm Cart</Link>
-                </ReactBootStrap.Button>
-                
+                <Button variant="primary">
+                    <Link to="/delivery" style={{textDecoration: 'none', color: 'white'}}>Confirm Cart</Link>
+                </Button>
+
             </div>
         );
-
-
     }
-
-
-
 }
 

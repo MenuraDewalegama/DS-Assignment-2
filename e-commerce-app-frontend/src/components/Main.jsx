@@ -1,8 +1,8 @@
-import React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import ProductHolder from './product/ProductsHolder';
 
-export default class Main extends React.Component {
+export default class Main extends Component {
 
     constructor(props) {
         super(props);
@@ -12,14 +12,11 @@ export default class Main extends React.Component {
         return (
             <div>
                 <Switch>
-
                     <Redirect exact from="/" to="/products"/>
-
                     {/* product component */}
                     <Route path="/products">
                         <ProductHolder/>
                     </Route>
-
                 </Switch>
             </div>
         );
