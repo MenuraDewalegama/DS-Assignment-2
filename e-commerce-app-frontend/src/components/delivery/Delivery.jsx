@@ -1,8 +1,6 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
-
+import {Button, Form} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 
 export default class Delivery extends React.Component {
@@ -14,63 +12,57 @@ export default class Delivery extends React.Component {
         };
     };
 
-    
-
     onChange(event) {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+        const {name, value} = event.target;
+        this.setState({[name]: value});
     }
 
+    render() {
+        return (
+            <div className="container-sm">
+                <br/>
+                <h1>Delivery Details</h1>
+                <br/><br/>
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="name" placeholder="Name"/>
+                    </Form.Group>
 
-render() {
-    return (
-        <div className="container-sm">
-            <br />
-            <h1>Delivery Details</h1>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control type="name" placeholder="address"/>
+                    </Form.Group>
 
-            <br />
-            <br />
-            <ReactBootStrap.Form>
-                <ReactBootStrap.Form.Group controlId="formBasicEmail">
-                    <ReactBootStrap.Form.Label>Name</ReactBootStrap.Form.Label>
-                    <ReactBootStrap.Form.Control type="name" placeholder="Name" />
-                </ReactBootStrap.Form.Group>
-
-                <ReactBootStrap.Form.Group controlId="formBasicPassword">
-                    <ReactBootStrap.Form.Label>Address</ReactBootStrap.Form.Label>
-                    <ReactBootStrap.Form.Control type="name" placeholder="address" />
-                </ReactBootStrap.Form.Group>
-
-                <ReactBootStrap.Form.Group controlId="Contact number">
-                    <ReactBootStrap.Form.Label>Address</ReactBootStrap.Form.Label>
-                    <ReactBootStrap.Form.Control type="name" placeholder="contact number" />
-                </ReactBootStrap.Form.Group>
+                    <Form.Group controlId="Contact number">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control type="name" placeholder="contact number"/>
+                    </Form.Group>
 
 
-                <ReactBootStrap.Form.Group controlId="Contact number">
-                    <ReactBootStrap.Form.Label>Email</ReactBootStrap.Form.Label>
-                    <ReactBootStrap.Form.Control type="name" placeholder="email" />
-                </ReactBootStrap.Form.Group>
+                    <Form.Group controlId="Contact number">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="name" placeholder="email"/>
+                    </Form.Group>
 
-                <ReactBootStrap.Form.Group controlId="formGridState">
-                    <ReactBootStrap.Form.Label>Payment Type</ReactBootStrap.Form.Label>
-                    <ReactBootStrap.Form.Control name="paymentType" as="select" onChange={event => this.onChange(event)} value={this.state.value} >
-                        <option value="/credit" >Credit</option>
-                        <option value="/mobile">Mobile </option>
-                    </ReactBootStrap.Form.Control>
-                </ReactBootStrap.Form.Group>
+                    <Form.Group controlId="formGridState">
+                        <Form.Label>Payment Type</Form.Label>
+                        <Form.Control name="paymentType" as="select" onChange={event => this.onChange(event)}
+                                      value={this.state.value}>
+                            <option value="/credit">Credit</option>
+                            <option value="/mobile">Mobile</option>
+                        </Form.Control>
+                    </Form.Group>
 
-
-                <br />
-                <ReactBootStrap.Button variant="primary">
-                    <Link to={this.state.paymentType} style={{ textDecoration: 'none', color: 'white' }}>Go next</Link>
-                </ReactBootStrap.Button>
-            </ReactBootStrap.Form>
-            <br />
-
-
-        </div>
-    );
-}
+                    <br/>
+                    <Button variant="primary">
+                        <Link to={this.state.paymentType} style={{textDecoration: 'none', color: 'white'}}>Go
+                            next</Link>
+                    </Button>
+                </Form>
+                <br/>
+            </div>
+        );
+    }
 }
 
