@@ -40,8 +40,10 @@ export default class ButtonAppBar extends Component {
                             {     //if user loged in
                             (true) ?  
                             <ReactBootStrap.Nav>
-                            <Link to="/cart" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
-                            <Link to="/login" className="nav-link">Logut </Link>
+                             <h3 style={{color:'white', margin:'auto'}}  >Hi User!  </h3>
+                            <Link style={{ margin:'auto'}} to="/cart" className="nav-link"><ReactBootStrap.Badge variant="secondary"> <Cart2 color="white" size={40} /></ReactBootStrap.Badge></Link>
+                            {/* <Link to="/login" className="nav-link" style={{color:'white', margin:'auto'}}> Logut </Link> */}
+                            <ReactBootStrap.Button variant="danger"style={{ height:'30%', margin:'auto'}} ><Link  to="/login" className="nav-link" > Logout</Link></ReactBootStrap.Button>
                             </ReactBootStrap.Nav>
 
                            //if user not logged in

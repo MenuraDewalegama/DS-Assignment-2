@@ -1,6 +1,8 @@
 import React from 'react';
 import Product from './Product';
-import ProductListItem from './ProductListItem';
+import ProductListItem, { cartList } from './ProductListItem';
+import { Button, Row, Col, Container } from 'react-bootstrap';
+
 
 
 export default class Products extends React.Component {
@@ -12,27 +14,38 @@ export default class Products extends React.Component {
     }
 
     selectProduct(product) {
-        this.setState({product: product});
+        this.setState({ product: product });
+     
     }
 
     render() {
-        const {products} = this.props;
+        const { products } = this.props;
         return (
-            <div className="container-sm" style={{marginTop: '20px'}}>
+            <div  style={{ marginLeft: '13%', marginTop:'20px' }}>
                 {/* header. */}
                 <section className="products-header">
-                    <h2>Products</h2>
+                    <h1>Products</h1>
                 </section>
 
-                {/* display product item by item by looping through. */}
-                {products.map(product => {
-                    return <ProductListItem
-                        key={product.id.toString()} product={product}
-                        selectProduct={product => this.selectProduct(product)}/>;
-                })}
-                <div>
-                    {this.state.product ? <Product product={this.state.product}/> : ''}
-                </div>
+                <Container fluid>
+                    <Row >
+                        {/* display product item by item by looping through. */}
+                        {products.map(product => {
+                            return <ProductListItem
+                                key={product.id.toString()} product={product}
+                                selectProduct={product => {
+                                    this.selectProduct(product)
+                                    console.log(product);
+                                }} />;
+                        })}
+                        <div>
+                            {this.state.product ? <Product product={this.state.product} /> : ''}
+                        </div>
+                    </Row>
+                </Container>
+
+
+
             </div>
         );
     }
