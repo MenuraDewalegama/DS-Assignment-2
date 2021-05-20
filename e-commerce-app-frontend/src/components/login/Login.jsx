@@ -8,7 +8,7 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            userID: '',
             password: ''
         };
     }
@@ -16,6 +16,7 @@ export default class Login extends React.Component {
     /* keep track of changes of the form field values. */
     onChange(event) {
         const {name, value} = event.target;
+        console.log(event.target);
         this.setState({[name]: value});
         console.log(value);
     }
@@ -29,16 +30,16 @@ export default class Login extends React.Component {
                     <br/><br/>
                     <Form>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control name="username" value={this.state.username} type="name"
-                                          onChange={event => this.onChange(event)}
-                                          placeholder="Username"/>
+                            <Form.Label>User ID</Form.Label>
+                            <Form.Control name="userID" value={this.state.userID} type="text"
+                                          onChange={(event) => this.onChange(event)}
+                                          placeholder="User ID"/>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control name="password" value={this.state.password} type="password"
-                                          onChange={event => this.onChange(event)}
+                                          onChange={(event) => this.onChange(event)}
                                           placeholder="Password"/>
                         </Form.Group>
                         <br/>
@@ -47,8 +48,8 @@ export default class Login extends React.Component {
                         </Button>
                     </Form>
                     <br/>
-                    <Link to="/register" style={{textDecoration: 'none', color: 'black'}}>Don't have an account?
-                        Register</Link>
+                    <Link to="/register"
+                          style={{textDecoration: 'none', color: 'black'}}>Don't have an account? Register</Link>
                 </div>
 
                 {/* router */}
