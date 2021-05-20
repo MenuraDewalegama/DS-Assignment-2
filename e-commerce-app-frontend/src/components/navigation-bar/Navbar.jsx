@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Badge, Button, Nav, Navbar} from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
+import './Nabar.css';
 
 /* components. */
 import Login from '../login/Login';
@@ -37,7 +38,7 @@ export default class ButtonAppBar extends Component {
                         {     // if user logged in
                             (true) ?
                                 <Nav>
-                                    <h3 style={{color: 'white', margin: 'auto'}}>Hi User! </h3>
+                                    <h4 className="user_name">Hi User! </h4>
                                     <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
                                         <Badge variant="secondary">
                                             <Cart2 color="white" size={40}/>
