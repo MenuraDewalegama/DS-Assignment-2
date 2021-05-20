@@ -96,6 +96,34 @@ class ProductProvider extends Component {
         });
     }
 
+    /** Update a existing product by calling backend services.
+     * @param product product object with the ID and new values.
+     * @returns Promise promise a result. if success, resolve boolean true,
+     * otherwise reject the error(errorResponse). */
+    updateProduct(product) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await ProductService.updateProduct(product);
+                if (response.status === 204) {
+                    /* 204 -  NO CONTENT, updated successfully. */
+                    /* get the products array. */
+                    const productsArr = [...this.state.products];
+                    /* find the index of the updated product element/object. */
+                    const indexOfProduct = productsArr.findIndex((productElem, index) => productElem.id === product.id);
+                    /* replace the updated product with the old one. */
+                    productsArr.splice(indexOfProduct, 1, product);
+
+                    this.setState((prevValue => {
+                        prevValue.products = productsArr;
+                    }));
+                    resolve(true);
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
