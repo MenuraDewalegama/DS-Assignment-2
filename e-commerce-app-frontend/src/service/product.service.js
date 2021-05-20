@@ -118,10 +118,17 @@ const updateProduct = (product) => {
 
 /** Delete a product by ProductID by using backend services.
  * @param productID ID of the product to be deleted.
- * @return Promise promise with a result. */
+ * @return Promise promise with a result. If successful, then resolve the ,
+ * otherwise, reject the error(errorResponse) */
 const deleteProduct = (productID) => {
-    /* send a delete request to the backend using axios. */
-    const result = axios.delete(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${productID}`);
+    return new Promise((resolve, reject) => {
+        try { /* send a delete request to the backend using axios. */
+            const result = axios.delete(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${productID}`);
+            resolve(result);
+        } catch (error) {
+            reject(error);
+        }
+    });
 };
 
 
