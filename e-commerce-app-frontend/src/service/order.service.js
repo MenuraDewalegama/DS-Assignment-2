@@ -10,7 +10,7 @@ const axios = require('axios');
  * otherwise reject the error. */
 const addOrder = (order) => {
     return new Promise((resolve, reject) => {
-        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}/order`, {
+        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}order`, {
             data: JSON.stringify(order)
         }).then(response => {
             /* response received */

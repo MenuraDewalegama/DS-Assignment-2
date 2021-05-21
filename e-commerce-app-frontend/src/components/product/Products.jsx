@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductListItem from './ProductListItem';
-import {Container, Row} from 'react-bootstrap';
+import {Button, Col, Container, Row} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 export default class Products extends React.Component {
     constructor(props) {
@@ -17,11 +18,24 @@ export default class Products extends React.Component {
     render() {
         const {products} = this.props;
         return (
-            <div style={{marginLeft: '13%', marginTop: '20px'}}>
+            <Container style={{padding: '2rem 0'}}>
                 {/* header. */}
-                <section className="products-header">
-                    <h1>Products</h1>
-                </section>
+                <Container fluid className="products-header p-0">
+                    <Row>
+                        <Col>
+                            <h1>Products</h1>
+                        </Col>
+                        <Col style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            justifyItems: 'center'
+                        }}>
+                            {(true) ? <Link to="/products/add">< Button> Add < /Button></Link> : ""}
+                        </Col>
+                    </Row>
+
+                </Container>
 
                 <Container fluid>
                     <Row>
@@ -36,7 +50,7 @@ export default class Products extends React.Component {
                         })}
                     </Row>
                 </Container>
-            </div>
+            </Container>
         );
     }
 }
