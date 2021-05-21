@@ -29,6 +29,8 @@ class ProductProvider extends Component {
         };
     }
 
+
+
     /** Get all the products by calling backend.
      * @return Promise with a result. If success, then resolve the product.
      * otherwise, reject the error(errorRespond) */
@@ -155,11 +157,11 @@ class ProductProvider extends Component {
         return (
             <ProductContext.Provider value={{
                 products: this.state.products,
-                getAllProducts: this.getAllProducts(),
-                getProductByID: this.getProductByID,
-                addProduct: this.addProduct(),
-                updateProduct: this.updateProduct(),
-                deleteProduct: this.deleteProduct(),
+                getAllProducts: this.getAllProducts.bind(this),
+                getProductByID: this.getProductByID.bind(this),
+                addProduct: this.addProduct.bind(this),
+                updateProduct: this.updateProduct.bind(this),
+                deleteProduct: this.deleteProduct.bind(this),
             }
             }>
                 {this.props.children}
@@ -167,3 +169,8 @@ class ProductProvider extends Component {
         );
     }
 }
+
+const ProductConsumer = ProductContext.Consumer;
+module.exports = {
+    ProductContext, ProductProvider, ProductConsumer
+};
