@@ -34,12 +34,18 @@ export default function ProductListItem(props) {
             <Row>
                 <Col>
                     <Card style={{width: '20rem'}}>
-                        <Card.Img variant="top" src="https://via.placeholder.com/300"/>
+                        <Card.Img style={{height: '300px'}}
+                                  variant="top"
+                                  src={(product?.imagePath) ?
+                                      `${process.env.ECOMMERCE_BACKEND_API_URL_FOR_IMAGE}${product?.imagePath}` :
+                                      'https://via.placeholder.com/300'}
+                                  alt="Product image"
+                        />
                         <Card.Body>
                             <Card.Title>Name: {product.name}</Card.Title>
                             <Card.Text style={fontStyle}>Description: {product.description}</Card.Text>
-                            <Card.Text>Unit Price: {product.price}</Card.Text>
-                            <Card.Text>Hand On Quantity: {product.quantity}</Card.Text>
+                            <Card.Text>Unit Price: {product.unitPrice}</Card.Text>
+                            <Card.Text>Hand On Quantity: {product.handOnQuantity}</Card.Text>
 
                             <Row>
 

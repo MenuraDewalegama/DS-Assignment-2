@@ -13,9 +13,15 @@ const router = new Router({
 /** serve product images. */
 router.get('/products/:id', async (ctx) => {
     try {
+        console.log(ctx.path);
+        console.log((ctx.path).substring(1));
         await koaSend(ctx, ctx.path);
     } catch (error) {
-        ctx.response.status = 500;
+        if (error?.status ===404){
+            ctx.response.status = 404;
+        } else {
+            ctx.response.status = 500;
+        }
         console.log(error);
     }
 });

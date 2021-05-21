@@ -42,7 +42,7 @@ export default class Products extends React.Component {
                         {/* display product item by item by looping through. */}
                         {products.map(product => {
                             return <ProductListItem
-                                key={product.id.toString()} product={product}
+                                key={product._id} product={product}
                                 selectProduct={product => {
                                     this.selectProduct(product);
                                     console.log(product);
