@@ -18,7 +18,7 @@ const authenticate = ({userID, password}) => {
     };
 
     return new Promise((resolve, reject) => {
-        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}/auth`, {
+        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}auth`, {}, {
             auth: body,
             responseType: 'text'
         }).then(response => {
@@ -26,6 +26,8 @@ const authenticate = ({userID, password}) => {
             // TODO: JWT should be handled here
             if (response.status === 200) {
                 const jwtToken = response.data;
+                console.log(response);
+                console.log(`received JWT: ${jwtToken}`);
                 /* save encoded JWT Token. */
                 sessionStorage.setItem(sha256(process.env.JWT_TOKEN_NAME), jwtToken);
 
@@ -56,7 +58,7 @@ const authenticate = ({userID, password}) => {
  * @return Promise with result. if success then resolves the user data, otherwise reject the error. */
 const getUserByID = (userID) => {
     return new Promise((resolve, reject) => {
-        axios.get(`${process.env.ECOMMERCE_BACKEND_API_URL}/users/${userID}`).then(response => {
+        axios.get(`${process.env.ECOMMERCE_BACKEND_API_URL}users/${userID}`).then(response => {
             if (response.status === 200) {
                 console.log(response.data);
                 resolve(response.data);
@@ -73,7 +75,7 @@ const getUserByID = (userID) => {
  * otherwise reject the error. */
 const addUser = (user) => {
     return new Promise((resolve, reject) => {
-        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}/users`, {
+        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}users`, {
             data: JSON.stringify(user)
         }).then(response => {
             resolve(response);

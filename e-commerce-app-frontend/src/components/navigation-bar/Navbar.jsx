@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Nav, Navbar} from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
 import {Cart2} from 'react-bootstrap-icons';
+import sha256 from 'crypto-js/sha256';
 import './Nabar.css';
 
 /* components. */
@@ -12,11 +13,11 @@ import Delivery from '../delivery/Delivery';
 import Credit from '../payment/Credit';
 import Mobile from '../payment/Mobile';
 
-export default class ButtonAppBar extends Component {
+export default class NavigationBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userStatus: true
+            user: null
         };
     };
 
@@ -39,7 +40,7 @@ export default class ButtonAppBar extends Component {
                         </Nav>
 
                         {     // if user logged in
-                            (true) ?
+                            (sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_ID))) ?
                                 <Nav>
                                     <h5 className="user_name">Hi User!</h5>
                                     <Link style={{margin: 'auto'}} to="/cart" className="nav-link">

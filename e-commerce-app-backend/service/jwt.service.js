@@ -18,7 +18,8 @@ const generateJWT = (payload) => {
             const token = jwt.sign(user, process.env.JWT_ACCESS_TOKEN_PRIVATE_KEY, {
                 expiresIn: ms('1d'), // ONE DAY
                 audience: process.env.JWT_ACCESS_TOKEN_AUDIENCE,
-                subject: process.env.JWT_ACCESS_TOKEN_SUBJECT
+                subject: process.env.JWT_ACCESS_TOKEN_SUBJECT,
+                issuer: process.env.JWT_ACCESS_TOKEN_ISSUER
             });
             resolve(token);
         } catch (error) {

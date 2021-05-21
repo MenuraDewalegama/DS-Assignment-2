@@ -1,15 +1,20 @@
 import React from 'react';
 import {Button, Form} from 'react-bootstrap';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch, withRouter} from 'react-router-dom';
 import Register from '../register/Register';
+import UserService from '../../service/user.service';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             userID: '',
-            password: ''
+            password: '',
+            errorMessage: {
+                userIDField: '',
+                passwordField: ''
+            }
         };
     }
 
@@ -19,6 +24,55 @@ export default class Login extends React.Component {
         console.log(event.target);
         this.setState({[name]: value});
         console.log(value);
+    }
+
+    redirectToRoot() {
+        const {history} = this.props;
+        if (history) {
+            history.push('/');
+        }
+    }
+
+    async performLogin() {
+        const {userID, password} = this.state;
+        let formValidity = true;
+        if (!(/[A-Za-z0-9]{24}/.test(userID))) {
+            formValidity = false;
+            this.setState({
+                errorMessage: {
+                    userIDField: `This field is required, should 24 digit, only letters and numbers or combination of both is allowed`
+                }
+            });
+        }
+
+        if (password.length <= 4) {
+            formValidity = false;
+            this.setState({
+                errorMessage: {
+                    userIDField: `This field is required, should not be empty. At least 5 digits or more allowed.`
+                }
+            });
+
+            return;
+        }
+
+        if (formValidity) {
+            this.setState({
+                errorMessage: ''
+            });
+
+            // send credentials
+            try {
+                const response = await UserService.authenticate({userID, password});
+                if (response) {
+                    alert('login successful!');
+                    this.redirectToRoot();
+                }
+            } catch (error) {
+                alert('login failed!');
+            }
+
+        }
     }
 
     render() {
@@ -34,6 +88,8 @@ export default class Login extends React.Component {
                             <Form.Control name="userID" value={this.state.userID} type="text"
                                           onChange={(event) => this.onChange(event)}
                                           placeholder="User ID"/>
+                            {(this.state.errorMessage.userIDField) ?
+                                <p className="text-danger">{this.state.errorMessage.userIDField}</p> : ''}
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
@@ -41,11 +97,12 @@ export default class Login extends React.Component {
                             <Form.Control name="password" value={this.state.password} type="password"
                                           onChange={(event) => this.onChange(event)}
                                           placeholder="Password"/>
+                            {(this.state.errorMessage.passwordField) ?
+                                <p className="text-danger">{this.state.errorMessage.passwordField}</p> : ''}
                         </Form.Group>
                         <br/>
-                        <Button variant="primary">
-                            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>Login</Link>
-                        </Button>
+                        <Button variant="primary" onClick={this.performLogin.bind(this)}>Login</Button>
+                        {/*<Link to="/" style={{textDecoration: 'none', color: 'white'}}>Login</Link>*/}
                     </Form>
                     <br/>
                     <Link to="/register"
@@ -62,3 +119,5 @@ export default class Login extends React.Component {
         );
     }
 }
+
+export default withRouter(Login);

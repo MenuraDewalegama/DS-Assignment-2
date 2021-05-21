@@ -2,6 +2,9 @@ const Koa = require('koa');
 const fs = require('fs');
 const path = require('path');
 const koaBody = require('koa-body');
+const jwt = require('jsonwebtoken');
+const koaJWT = require('koa-jwt');
+const ms = require('ms');
 const dotenv = require('dotenv').config();
 require('./util/database.util');
 
@@ -41,10 +44,30 @@ const ProductRoutes = require('../e-commerce-app-backend/routes/product.routes')
 const UserRoutes = require('../e-commerce-app-backend/routes/user.routes');
 const OrderRoutes = require('../e-commerce-app-backend/routes/order.routes');
 
-
+/* auth route and assets routes are exposed. */
 app.use(AuthRoutes.routes()).use(AuthRoutes.allowedMethods());
 app.use(AssetsRoutes.routes()).use(AssetsRoutes.allowedMethods());
+
+// Custom 401 handling if you don't want to expose koa-jwt errors to users
+app.use(function (ctx, next) {
+    return next().catch((err) => {
+        if (401 === err.status) {
+            ctx.status = 401;
+            ctx.body = 'Protected resource, use Authorization header to get access\n';
+        } else {
+            throw err;
+        }
+    });
+});
+
 /* JWT protected routes should place user this line. */
+app.use(koaJWT({
+    secret: process.env.JWT_ACCESS_TOKEN_PRIVATE_KEY,
+    issuer: process.env.JWT_ACCESS_TOKEN_ISSUER,
+    audience: process.env.JWT_ACCESS_TOKEN_AUDIENCE
+}));
+
+
 app.use(CartRoutes.routes()).use(CartRoutes.allowedMethods());
 app.use(ProductRoutes.routes()).use(ProductRoutes.allowedMethods());
 app.use(UserRoutes.routes()).use(UserRoutes.allowedMethods());
