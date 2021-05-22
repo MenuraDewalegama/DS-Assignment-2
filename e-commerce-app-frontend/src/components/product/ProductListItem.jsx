@@ -8,6 +8,9 @@ import sha256 from "crypto-js/sha256";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 /* TODO: this will be removed. */
 export const cartList = [];
 
