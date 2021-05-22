@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Card, Col, Row} from 'react-bootstrap';
 /*icons*/
 import {CartPlus, PencilSquare} from 'react-bootstrap-icons';
 import {Link, useHistory} from 'react-router-dom';
+import sha256 from 'crypto-js/sha256';
 
 /* TODO: this will be removed. */
 export const cartList = [];
@@ -16,6 +17,9 @@ export default function ProductListItem(props) {
     const {product, selectProduct} = props;
     let history = useHistory();
 
+    const [isAdmin, setIsAdmin] = useState((atob(sessionStorage
+        .getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))) === 'ADMIN'));
+
     /* add the product in to cart. */
     const onClickAddToCart = () => {
         cartList.push(product);
@@ -26,7 +30,6 @@ export default function ProductListItem(props) {
     const redirectToEdit = () => {
         history.push(`/products/${product.id}/edit`);
     };
-
 
     return (
         <div style={{marginRight: '5%'}}>
@@ -50,20 +53,26 @@ export default function ProductListItem(props) {
                             <Row>
 
                                 {   // product edit button
-                                    (true) ? <Button style={{margin: 'auto', padding: '0.4rem 1rem'}} variant="primary"
-                                                     onClick={() => {
-                                                         selectProduct(product);
-                                                         redirectToEdit();
-                                                     }} title="Edit Product">
-                                        <PencilSquare style={{fontSize: '1.6rem'}}/>
-                                    </Button> : ''}
+                                    (isAdmin) ?
+                                        <Button style={{margin: 'auto', padding: '0.4rem 1rem'}}
+                                                variant="primary"
+                                                onClick={() => {
+                                                    selectProduct(product);
+                                                    redirectToEdit();
+                                                }}
+                                                title="Edit Product">
+                                            <PencilSquare style={{fontSize: '1.6rem'}}/>
+                                        </Button> : ''}
 
                                 <Link to="/cart" style={{color: 'white', margin: 'auto'}}>
-                                    <Button style={{margin: 'auto', padding: '0.4rem 1rem'}} variant="primary"
+                                    <Button style={{margin: 'auto', padding: '0.4rem 1rem'}}
+                                            variant="primary"
                                             onClick={() => {
                                                 selectProduct(product);
                                                 onClickAddToCart(product);
-                                            }} title="Add to Cart"><CartPlus style={{fontSize: '1.6rem'}}/>
+                                            }}
+                                            title="Add to Cart">
+                                        <CartPlus style={{fontSize: '1.6rem'}}/>
                                     </Button>
                                 </Link>
                             </Row>
