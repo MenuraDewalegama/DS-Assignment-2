@@ -3,7 +3,7 @@
 @date : 18/05/2021
 */
 
-const axios = require('axios');
+import axios from './axios.service';
 
 /** Get all products by calling backend services.
  * @return Promise promise a result. */

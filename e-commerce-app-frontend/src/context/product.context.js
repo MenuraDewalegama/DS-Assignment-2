@@ -65,7 +65,9 @@ class ProductProvider extends Component {
     getProductByID(productID) {
         return new Promise(async (resolve, reject) => {
 
-            const requestedProduct = this.state.products.filter(value => value.id === productID);
+            const requestedProduct = this.state.products.find(productElem => (productElem?._id === productID));
+            console.log(this.state.products);
+            console.log('found something: ', requestedProduct);
             if (requestedProduct) {
                 resolve(requestedProduct);
             } else {
