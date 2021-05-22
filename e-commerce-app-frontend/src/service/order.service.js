@@ -2,7 +2,8 @@
 @author : Dhanusha Perera
 @date : 19/05/2021
 */
-const axios = require('axios');
+// const axios = require('axios');
+import axios from './axios.service';
 
 /** Add a new order by calling backend services.
  * @param order order object containing values for an order.

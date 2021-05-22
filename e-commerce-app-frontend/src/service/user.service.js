@@ -3,7 +3,8 @@
 @date : 18/05/2021
 */
 
-const axios = require('axios');
+// const axios = require('axios');
+import axios from './axios.service';
 import sha256 from 'crypto-js/sha256';
 
 /** Call the auth API and get a token using userID and password.
