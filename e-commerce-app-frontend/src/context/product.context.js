@@ -40,12 +40,12 @@ class ProductProvider extends Component {
      * @return Promise with a result. If success, then resolve the product.
      * otherwise, reject the error(errorRespond) */
     getAllProducts() {
-        console.log('getting all products!');
+        // console.log('getting all products!');
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await ProductService.getAllProducts();
                 if (response.status === 200) {
-                    console.log(response);
+                    // console.log(response);
                     this.setState({
                         products: response.data
                     });

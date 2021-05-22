@@ -28,7 +28,7 @@ export default class ProductsHolder extends React.Component {
     }
 
     render() {
-        console.log('product holder works', this.context);
+        // console.log('product holder works', this.context);
         const isAdmin = (atob(sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))) === 'ADMIN');
         return (
             <div>

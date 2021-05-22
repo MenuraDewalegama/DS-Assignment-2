@@ -27,7 +27,7 @@ export default class AddEditProduct extends React.Component {
     componentDidMount() {
         /* get the product id from the URL and assign it to state(productId). */
         const productIDFromURL = this.props.match.params?.productID;
-        console.log(typeof productIDFromURL); // string
+        // console.log(typeof productIDFromURL); // string
         if (productIDFromURL) {
             /* set isAdding to false because we deal with updating a record. */
             this.setState({
@@ -95,6 +95,9 @@ export default class AddEditProduct extends React.Component {
 
         if (this.state.isAdding) {
             /* add a new product. */
+            if (productObject.imagePath.length === 0){
+                delete productObject.imagePath;
+            }
             saveOrUpdate(productObject);
 
             // TODO: display insertion successful or not
@@ -176,8 +179,8 @@ export default class AddEditProduct extends React.Component {
                             <Form.Group controlId="formBasicQuantity">
                                 <Form.Label>Quantity</Form.Label>
                                 <Form.Control type="text" name="quantity"
-                                              placeholder="Quantity"
-                                              value={this.state.quantity}
+                                              placeholder="Hand On Quantity"
+                                              value={this.state.handOnQuantity}
                                               onChange={event => this.onChange(event)}/>
                             </Form.Group>
 
