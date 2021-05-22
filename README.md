@@ -1,6 +1,6 @@
 # ABOUT THIS PROJECT
 
-## Welcome to E-Commerce Web App!
+## Welcome to E-Commerce Web Application!
 <a><img src="https://img.shields.io/badge/DS-2021S1__JUNE__WE__05-green"/></a>
 E-Commerce is web application that developed for Distributed Sysstem module
 
