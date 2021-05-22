@@ -20,7 +20,7 @@ export default class Mobile extends React.Component {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Mobile number</Form.Label>
-                        <Form.Control type="name" placeholder="address"/>
+                        <Form.Control type="name" placeholder="mobile number"/>
                     </Form.Group>
 
 

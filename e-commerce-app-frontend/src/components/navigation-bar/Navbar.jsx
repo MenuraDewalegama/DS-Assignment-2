@@ -18,7 +18,6 @@ export default class NavigationBar extends Component {
         super(props);
     };
 
-
     /* log out the user. */
     performLogOut(logOutUser) {
         logOutUser();
