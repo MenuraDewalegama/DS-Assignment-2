@@ -3,7 +3,6 @@ import {Button, Form} from 'react-bootstrap';
 import {BrowserRouter as Router, Link, Route, Switch, withRouter} from 'react-router-dom';
 import Register from '../register/Register';
 import {UserContext} from '../../context/user.context';
-import UserService from '../../service/user.service';
 
 class Login extends React.Component {
 
@@ -24,9 +23,7 @@ class Login extends React.Component {
     /* keep track of changes of the form field values. */
     onChange(event) {
         const {name, value} = event.target;
-        console.log(event.target);
         this.setState({[name]: value});
-        console.log(value);
     }
 
     /* redirect to the root page. */
