@@ -11,13 +11,15 @@ export default class Main extends Component {
     render() {
         return (
             <div>
+                 {/* <h1>Products</h1> */}
                 <Switch>
                     <Redirect exact from="/" to="/products"/>
                     {/* product component */}
                     <Route path="/products">
                         <ProductHolder/>
-                    </Route>
+                   </Route>
                 </Switch>
+            
             </div>
         );
     }

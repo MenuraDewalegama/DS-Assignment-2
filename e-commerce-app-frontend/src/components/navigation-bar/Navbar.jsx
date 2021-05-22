@@ -54,6 +54,11 @@ export default class NavigationBar extends Component {
 
                                 //if user is not logged in
                                 : <Nav>
+                                    
+                                       <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
+                                        <Cart2 className="navbar_icon"/>
+                                    </Link>
+
                                     <Link to="/login" className="nav-link navigation_property">Login</Link>
                                     <Link to="/register" className="nav-link navigation_property">Register</Link>
                                 </Nav>
