@@ -34,7 +34,8 @@ export default class Products extends React.Component {
                             justifyContent: 'flex-end',
                             justifyItems: 'center'
                         }}>
-                            {(isAdmin) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
+                        {(isAdmin) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
+
                         </Col>
                     </Row>
                 </Container>

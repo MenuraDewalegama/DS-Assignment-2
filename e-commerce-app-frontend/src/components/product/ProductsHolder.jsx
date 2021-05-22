@@ -103,23 +103,17 @@ export default class ProductsHolder extends React.Component {
 
     /** temporary method to add a new product. */
     addProduct(product) {
-        console.log('adding a new product -------------------------');
-        console.log(product);
-        // this.context.addProduct(product);
+        return this.context.addProduct(product);
     }
 
     /** temporary method to update the product. */
     updateProduct(product) {
-        console.log('updating product -------------------------');
-        console.log(product);
-        // this.context.updateProduct(product);
+        return this.context.updateProduct(product);
     }
 
     render() {
-        const { cartList } = this.props;
-        console.log("product holder started")
+      const { cartList } = this.props;
 
-        console.log('product holder works', this.context);
         const isAdmin = (atob(sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))) === 'ADMIN');
         return (
             <div>

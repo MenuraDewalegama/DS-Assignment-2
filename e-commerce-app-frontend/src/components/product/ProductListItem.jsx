@@ -32,7 +32,7 @@ export default function ProductListItem(props) {
 
     /** redirecting to the edit page,using product ID. */
     const redirectToEdit = () => {
-        history.push(`/products/${product.id}/edit`);
+        history.push(`/products/${product?._id}/edit`);
     };
 
     const notify = () => toast.info('Item added to the Cart', {
@@ -51,7 +51,7 @@ export default function ProductListItem(props) {
             <Row>
                 <Col>
                     <Card style={{width: '20rem'}}>
-                        <Card.Img style={{height: '300px'}}
+                        <Card.Img style={{objectFit: 'cover', maxHeight: '300px'}}
                                   variant="top"
                                   src={(product?.imagePath) ?
                                       `${process.env.ECOMMERCE_BACKEND_API_URL_FOR_IMAGE}${product?.imagePath}` :

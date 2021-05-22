@@ -1,9 +1,12 @@
 import React from 'react';
-import {Button, Container, Row, Col, Form, Image} from 'react-bootstrap';
+import {Button, Col, Container, Form, Image, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Prompt from '../prompt/Prompt';
+import {ProductContext} from '../../context/product.context';
 
 export default class AddEditProduct extends React.Component {
+
+    static contextType = ProductContext;
 
     constructor(props) {
         super(props);
@@ -25,9 +28,12 @@ export default class AddEditProduct extends React.Component {
 
     /* life cycle. */
     componentDidMount() {
+
+        console.log('add-edit : ', this.context);
+
         /* get the product id from the URL and assign it to state(productId). */
         const productIDFromURL = this.props.match.params?.productID;
-        console.log(typeof productIDFromURL); // string
+        // console.log(typeof productIDFromURL); // string
         if (productIDFromURL) {
             /* set isAdding to false because we deal with updating a record. */
             this.setState({
@@ -45,8 +51,23 @@ export default class AddEditProduct extends React.Component {
                 /* find the a matching record by given ID,
                 * if no matching record found set the state(productRecord) to null,
                 * if matching record is found. */
-
                 // TODO: set state(imagePath), if found matching record.
+                this.context.getProductByID(productIDFromURL).then(productElem => {
+                    // console.log(productElem);
+                    this.setState({
+                        productRecord: productElem,
+                        productId: productElem?._id,
+                        name: productElem?.name,
+                        description: productElem?.description,
+                        unitPrice: productElem?.unitPrice,
+                        handOnQuantity: productElem?.handOnQuantity,
+                        imagePath: (productElem?.imagePath) ? productElem?.imagePath : '',
+                        imageFile: null
+                    });
+                }).catch(reason => {
+                    console.error(reason);
+                });
+
             }
             console.log(productIDFromURL);
         }
@@ -95,21 +116,39 @@ export default class AddEditProduct extends React.Component {
 
         if (this.state.isAdding) {
             /* add a new product. */
-            saveOrUpdate(productObject);
-
-            // TODO: display insertion successful or not
+            if (productObject.hasOwnProperty('imagePath') && productObject.imagePath.length === 0) {
+                delete productObject.imagePath;
+            }
+            saveOrUpdate(productObject).then(value => {
+                // TODO: display insert successful or not
+                // display insertion successful
+                console.log('Product added successfully!');
+                window.location = '/';
+            }).catch(reason => {
+                console.error(reason);
+            });
         } else {
             /* update operation. */
             productObject.id = this.state.productId;
-            saveOrUpdate(productObject);
-
-            // TODO: display update successful or not
+            saveOrUpdate(productObject).then(value => {
+                // TODO: display update successful or not
+                // display updated successfully
+                console.log('Product updated successfully!');
+                window.location = '/';
+            }).catch(reason => {
+                console.error(reason);
+            });
         }
         this.setState({
+            isProductIdValid: false,
+            productRecord: null, // if matching record found, then we can store it here
+            productId: 0,
             name: '',
             description: '',
-            price: '',
-            quantity: ''
+            unitPrice: 0.00,
+            handOnQuantity: 0,
+            imagePath: '',
+            imageFile: null
         });
     }
 
@@ -127,12 +166,12 @@ export default class AddEditProduct extends React.Component {
 
         /* if no matching record found. */
         // TODO: if no matching record is found then, display 'no matching record is found'
-        // if (!this.state.productRecord) {
-        //     const message = 'No matching product record found.';
-        //     return (
-        //         <><Prompt message={message}/></>
-        //     );
-        // }
+        if (!this.state.productRecord && !this.state.isAdding) {
+            const message = 'No matching product record found.';
+            return (
+                <><Prompt message={message}/></>
+            );
+        }
 
         return (
             <div>
@@ -159,7 +198,7 @@ export default class AddEditProduct extends React.Component {
 
                             <Form.Group controlId="formBasicDescription">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control type="text" name="description"
+                                <Form.Control as="textarea" type="text" name="description"
                                               placeholder="Description"
                                               value={this.state.description}
                                               onChange={event => this.onChange(event)}/>
@@ -174,10 +213,10 @@ export default class AddEditProduct extends React.Component {
                             </Form.Group>
 
                             <Form.Group controlId="formBasicQuantity">
-                                <Form.Label>Quantity</Form.Label>
-                                <Form.Control type="text" name="quantity"
-                                              placeholder="Quantity"
-                                              value={this.state.quantity}
+                                <Form.Label>Hand On Quantity</Form.Label>
+                                <Form.Control type="text" name="handOnQuantity"
+                                              placeholder="Hand On Quantity"
+                                              value={this.state.handOnQuantity}
                                               onChange={event => this.onChange(event)}/>
                             </Form.Group>
 
@@ -187,6 +226,7 @@ export default class AddEditProduct extends React.Component {
                                            className="productImageContainer">
                                     {(this.state.isAdding) ? '' :
                                         <><Image
+                                            style={{width: '300px'}}
                                             src={(this.state?.imagePath) ?
                                                 `http://localhost:3000${this.state.imagePath}` :
                                                 `https://via.placeholder.com/300`}
