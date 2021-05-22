@@ -30,7 +30,7 @@ Tech behind the E-Commerce web application:
 ## Installation
 
 ### Prerequisites
-- Required NodeJs version 8+ installed in the system.
+- Required NodeJs version v16.2.0 installed in the system.
 - Required MongoDB installed in the system.
 
 ### Cloning the project
