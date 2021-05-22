@@ -1,11 +1,6 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Link, Switch, Route, Redirect } from 'react-router-dom';
-import { cartList } from '../product/ProductListItem';
-
-import CartHolder from '../cart/CartHolder';
-
-
+import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 /* This will be removed, soon.*/
 const cartItems = [
@@ -25,8 +20,6 @@ const cartItems = [
     }
 ];
 
-
-
 export default class Cart extends React.Component {
 
     constructor(props) {
@@ -34,17 +27,13 @@ export default class Cart extends React.Component {
     }
 
     render() {
-        console.log("cart page displayed");
         return (
-            
             <div>
-           
-                <Switch>
-                    {/* product component */}
-                    <Route path="/cart">
-                        <CartHolder/>
-                    </Route>
-                </Switch>
+                <h1>This is the cart page</h1>
+                <Button variant="primary">
+                    <Link to="/delivery" style={{textDecoration: 'none', color: 'white'}}>Confirm Cart</Link>
+                </Button>
+
             </div>
         );
     }

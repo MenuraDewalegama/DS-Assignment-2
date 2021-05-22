@@ -22,11 +22,10 @@ export default class Products extends React.Component {
         return (
             <Container style={{padding: '2rem 0'}}>
                 {/* header. */}
-
                 <Container fluid className="products-header p-0">
                     <Row>
                         <Col>
-                           <h1>Products</h1>
+                            <h1>Products</h1>
                         </Col>
                         <Col style={{
                             display: 'flex',
@@ -34,10 +33,10 @@ export default class Products extends React.Component {
                             justifyContent: 'flex-end',
                             justifyItems: 'center'
                         }}>
-                        {(isAdmin) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
-
+                            {(isAdmin) ? <Link to="/products/add">< Button> Add < /Button></Link> : ''}
                         </Col>
                     </Row>
+
                 </Container>
 
                 <Container fluid>
@@ -52,7 +51,6 @@ export default class Products extends React.Component {
                         })}
                     </Row>
                 </Container>
-
             </Container>
         );
     }
