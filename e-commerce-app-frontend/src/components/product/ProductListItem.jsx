@@ -5,6 +5,10 @@ import {CartPlus, PencilSquare} from 'react-bootstrap-icons';
 import {Link, useHistory} from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 /* TODO: this will be removed. */
 export const cartList = [];
 
@@ -30,6 +34,16 @@ export default function ProductListItem(props) {
     const redirectToEdit = () => {
         history.push(`/products/${product?._id}/edit`);
     };
+
+    const notify = () => toast.info('Item added to the Cart', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
 
     return (
         <div style={{marginRight: '5%'}}>
@@ -70,9 +84,9 @@ export default function ProductListItem(props) {
                                             onClick={() => {
                                                 selectProduct(product);
                                                 onClickAddToCart(product);
-                                            }}
-                                            title="Add to Cart">
-                                        <CartPlus style={{fontSize: '1.6rem'}}/>
+                                                notify();
+                                            }} title="Add to Cart"><CartPlus style={{fontSize: '1.6rem'}}/>
+                                            
                                     </Button>
                                 </Link>
                             </Row>
