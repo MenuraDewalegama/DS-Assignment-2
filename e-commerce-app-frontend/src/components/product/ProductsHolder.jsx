@@ -15,15 +15,11 @@ export default class ProductsHolder extends React.Component {
 
     /** temporary method to add a new product. */
     addProduct(product) {
-        console.log('adding a new product -------------------------');
-        console.log(product);
         return this.context.addProduct(product);
     }
 
     /** temporary method to update the product. */
     updateProduct(product) {
-        console.log('updating product -------------------------');
-        console.log(product);
         return this.context.updateProduct(product);
     }
 

@@ -45,12 +45,10 @@ class ProductProvider extends Component {
      * @return Promise with a result. If success, then resolve the product.
      * otherwise, reject the error(errorRespond) */
     getAllProducts() {
-        // console.log('getting all products!');
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await ProductService.getAllProducts();
                 if (response.status === 200) {
-                    // console.log(response);
                     this.setState({
                         products: response.data
                     });
@@ -71,8 +69,6 @@ class ProductProvider extends Component {
         return new Promise(async (resolve, reject) => {
 
             const requestedProduct = this.state.products.find(productElem => (productElem?._id === productID));
-            console.log(this.state.products);
-            console.log('found something: ', requestedProduct);
             if (requestedProduct) {
                 resolve(requestedProduct);
             } else {
@@ -110,10 +106,8 @@ class ProductProvider extends Component {
                         products: newProductList
                     });
 
-                    console.log('setStated list: ', this.state.products);
                     const addedProduct = this.state
                         .products.find(productElem => productElem._id === responseResultObject?.generatedId);
-                    console.log(addedProduct);
                     if (addedProduct) {
                         resolve(addedProduct);
                     } else {

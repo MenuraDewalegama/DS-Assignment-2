@@ -28,7 +28,6 @@ export default function ProductListItem(props) {
 
     /** redirecting to the edit page,using product ID. */
     const redirectToEdit = () => {
-        console.log('edit id: ', product?._id);
         history.push(`/products/${product?._id}/edit`);
     };
 

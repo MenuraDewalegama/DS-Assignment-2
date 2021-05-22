@@ -112,7 +112,6 @@ const deleteProduct = (productID) => {
  * @return FormData configured formData object. */
 const configureFormDataObject = (isAdding, product) => {
     return new Promise((resolve, reject) => {
-        console.log('configureFormDataObject product obj: ', product);
         try {
             let formData = new FormData();
             formData.append('name', product.name);
@@ -138,8 +137,6 @@ const configureFormDataObject = (isAdding, product) => {
                     }
                 }
             }
-
-            console.log('configureFormDataObject formData obj: ', [...formData]);
             resolve(formData);
         } catch (error) {
             reject(error);
