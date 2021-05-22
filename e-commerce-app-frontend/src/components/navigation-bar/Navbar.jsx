@@ -18,7 +18,6 @@ export default class NavigationBar extends Component {
         super(props);
     };
 
-
     /* log out the user. */
     performLogOut(logOutUser) {
         logOutUser();
@@ -51,14 +50,8 @@ export default class NavigationBar extends Component {
                                     <Button className="nav-link" variant="danger"
                                             onClick={() => this.performLogOut(logOutUser)}>Logout</Button>
                                 </Nav>
-
                                 //if user is not logged in
                                 : <Nav>
-                                    
-                                       <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
-                                        <Cart2 className="navbar_icon"/>
-                                    </Link>
-
                                     <Link to="/login" className="nav-link navigation_property">Login</Link>
                                     <Link to="/register" className="nav-link navigation_property">Register</Link>
                                 </Nav>
