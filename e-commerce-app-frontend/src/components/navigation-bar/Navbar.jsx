@@ -40,10 +40,9 @@ export default class NavigationBar extends Component {
                         </Nav>
 
                         {     // if user logged in
-                            (true) ? //todo: change this to 'currentuser'
+                            (currentUser) ?
                                 <Nav>
-                                    <h5 className="user_name">Hi User {currentUser?.name}</h5>
-                                   
+                                    <h5 className="user_name">Hi {currentUser?.name}</h5>
                                     <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
                                         <Cart2 className="navbar_icon"/>
                                     </Link>
@@ -51,10 +50,9 @@ export default class NavigationBar extends Component {
                                     <Button className="nav-link" variant="danger"
                                             onClick={() => this.performLogOut(logOutUser)}>Logout</Button>
                                 </Nav>
+
                                 //if user is not logged in
                                 : <Nav>
-                                  
-
                                     <Link to="/login" className="nav-link navigation_property">Login</Link>
                                     <Link to="/register" className="nav-link navigation_property">Register</Link>
                                 </Nav>
