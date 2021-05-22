@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Button, Nav, Navbar} from 'react-bootstrap';
 import {Link, Route, Switch} from 'react-router-dom';
 import {Cart2} from 'react-bootstrap-icons';
-import sha256 from 'crypto-js/sha256';
 import './Nabar.css';
+import {UserContext} from '../../context/user.context';
 
 /* components. */
 import Login from '../login/Login';
@@ -16,12 +16,18 @@ import Mobile from '../payment/Mobile';
 export default class NavigationBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: null
-        };
     };
 
+
+    /* log out the user. */
+    performLogOut(logOutUser) {
+        logOutUser();
+        window.location = '/'; // redirect to home page.
+    }
+
     render() {
+        const {currentUser, logOutUser} = this.context;
+
         return (
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -32,30 +38,21 @@ export default class NavigationBar extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            {/*<Link to="/" className="nav-link">*/}
-                            {/*    <Badge variant="secondary">*/}
-                            {/*        <House color="white" size={40}/>*/}
-                            {/*    </Badge>*/}
-                            {/*</Link>*/}
                         </Nav>
 
                         {     // if user logged in
-                            (sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_ID))) ?
+                            (currentUser) ?
                                 <Nav>
-                                    <h5 className="user_name">Hi User!</h5>
+                                    <h5 className="user_name">Hi {currentUser?.name}</h5>
                                     <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
                                         <Cart2 className="navbar_icon"/>
                                     </Link>
 
-
-                                    <Link to="/login" className="nav-link">
-                                        <Button variant="danger">Logout</Button>
-                                    </Link>
-
+                                    <Button className="nav-link" variant="danger"
+                                            onClick={() => this.performLogOut(logOutUser)}>Logout</Button>
                                 </Nav>
 
                                 //if user is not logged in
-
                                 : <Nav>
                                     
                                        <Link style={{margin: 'auto'}} to="/cart" className="nav-link">
@@ -94,3 +91,5 @@ export default class NavigationBar extends Component {
         );
     }
 }
+
+NavigationBar.contextType = UserContext;

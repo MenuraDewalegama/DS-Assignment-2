@@ -2,6 +2,7 @@ import React from 'react';
 import ProductListItem from './ProductListItem';
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import sha256 from 'crypto-js/sha256';
 
 export default class Products extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class Products extends React.Component {
 
     render() {
         const {products} = this.props;
-  
+        const isAdmin = (atob(sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))) === 'ADMIN');
         return (
             <Container style={{padding: '2rem 0'}}>
                 {/* header. */}
@@ -33,7 +34,7 @@ export default class Products extends React.Component {
                             justifyContent: 'flex-end',
                             justifyItems: 'center'
                         }}>
-                            {(true) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
+                            {(isAdmin) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
                         </Col>
                     </Row>
                 </Container>
@@ -43,7 +44,7 @@ export default class Products extends React.Component {
                         {/* display product item by item by looping through. */}
                         {products.map(product => {
                             return <ProductListItem
-                                key={product.id.toString()} product={product}
+                                key={product._id} product={product}
                                 selectProduct={product => {
                                     this.selectProduct(product);
                                 }}/>;

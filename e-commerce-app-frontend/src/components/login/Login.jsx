@@ -2,9 +2,12 @@ import React from 'react';
 import {Button, Form} from 'react-bootstrap';
 import {BrowserRouter as Router, Link, Route, Switch, withRouter} from 'react-router-dom';
 import Register from '../register/Register';
+import {UserContext} from '../../context/user.context';
 import UserService from '../../service/user.service';
 
 class Login extends React.Component {
+
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -26,6 +29,7 @@ class Login extends React.Component {
         console.log(value);
     }
 
+    /* redirect to the root page. */
     redirectToRoot() {
         const {history} = this.props;
         if (history) {
@@ -61,15 +65,16 @@ class Login extends React.Component {
                 errorMessage: ''
             });
 
+
             // send credentials
             try {
-                const response = await UserService.authenticate({userID, password});
-                if (response) {
-                    alert('login successful!');
+                if (await this.context.authenticateUser({userID, password})) {
+                    console.log('login successful!');
                     this.redirectToRoot();
                 }
             } catch (error) {
-                alert('login failed!');
+                console.log('login failed!');
+                console.error(error);
             }
 
         }

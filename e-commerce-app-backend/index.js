@@ -4,6 +4,7 @@ const path = require('path');
 const koaBody = require('koa-body');
 const jwt = require('jsonwebtoken');
 const koaJWT = require('koa-jwt');
+const unless = require('koa-unless');
 const ms = require('ms');
 const dotenv = require('dotenv').config();
 require('./util/database.util');
@@ -65,6 +66,10 @@ app.use(koaJWT({
     secret: process.env.JWT_ACCESS_TOKEN_PRIVATE_KEY,
     issuer: process.env.JWT_ACCESS_TOKEN_ISSUER,
     audience: process.env.JWT_ACCESS_TOKEN_AUDIENCE
+}).unless({
+    custom: ctx => {
+        return (ctx?.request.method === 'GET' && ctx?.request.url === '/products');
+    }
 }));
 
 
