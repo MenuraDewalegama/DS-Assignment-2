@@ -68,7 +68,7 @@ app.use(koaJWT({
     audience: process.env.JWT_ACCESS_TOKEN_AUDIENCE
 }).unless({
     custom: ctx => {
-        return (ctx?.request.method === 'GET' && ctx?.request.url === '/products');
+        return (ctx?.request.method === 'GET' && ctx?.request.url === '/products' || ctx?.request.method === 'POST' && ctx?.request.url === '/users');
     }
 }));
 

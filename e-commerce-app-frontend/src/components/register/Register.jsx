@@ -25,11 +25,8 @@ export default class Register extends React.Component {
                     </Form.Group>
 
                     <Form.Group controlId="formGridState">
-                        <Form.Label>Gender</Form.Label>
-                        <Form.Control as="select" defaultValue="Choose...">
-                            <option>Male</option>
-                            <option>Female</option>
-                        </Form.Control>
+                        <Form.Label>Content No</Form.Label>
+                        <Form.Control type="name" placeholder="Username"/>
                     </Form.Group>
 
                     <br/>
