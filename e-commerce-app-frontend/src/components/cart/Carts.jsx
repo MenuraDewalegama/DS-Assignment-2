@@ -39,7 +39,7 @@ export default class Carts extends React.Component {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            });
+        });
 
         return (
             <Container style={{ padding: '2rem 0' }}>
@@ -54,13 +54,17 @@ export default class Carts extends React.Component {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'flex-end',
-                            justifyItems: 'center'
+                            justifyItems: 'center',
+                            
                         }}>
-                            {(cartList.length > 0) ?<Link to='/'> < Button onClick={() => {
+                            {(cartList.length > 0) ? <Link to='/'> < Button style={{backgroundColor:"red"}}  onClick={() => {
                                 removeAll();
                                 notify();
-                            }}> Remove all </Button></Link>    
-                            : ""}
+                            }}> Remove all </Button></Link>
+                                : ""}
+                                 {(cartList.length > 0) ? <Link  to='/delivery' style={{marginLeft:"5%"}}> < Button  onClick={() => {
+                            }}> Next </Button></Link>
+                                : ""}
                         </Col>
                     </Row>
                 </Container>
@@ -76,6 +80,8 @@ export default class Carts extends React.Component {
                                 }} />;
                         })}
                     </Row>
+
+                   
                 </Container>
 
             </Container>

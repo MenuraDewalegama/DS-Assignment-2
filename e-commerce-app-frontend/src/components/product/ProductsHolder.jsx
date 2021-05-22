@@ -1,10 +1,6 @@
 import React from 'react';
 import Products from './Products';
-import { Route, Switch } from 'react-router-dom';
-import AddEditProduct from './AddEditProduct';
-import { cartList } from './ProductListItem';
-
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import AddEditProduct from './AddEditProduct';
 import { ProductContext } from '../../context/product.context';
 import sha256 from 'crypto-js/sha256';
