@@ -97,6 +97,7 @@ class UserProvider extends Component {
         sessionStorage.removeItem(sha256(process.env.JWT_TOKEN_NAME));
         sessionStorage.removeItem(sha256(process.env.AUTHENTICATED_USER_ID));
         sessionStorage.removeItem(sha256(process.env.AUTHENTICATED_USER_NAME));
+        sessionStorage.removeItem(sha256(process.env.AUTHENTICATED_USER_TYPE));
         this.setState({
             currentUser: null
         });
