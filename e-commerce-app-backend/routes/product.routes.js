@@ -64,7 +64,6 @@ router.get('/:id', async ctx => {
 /** insert a product. */
 router.post('/', async ctx => {
     const product = ctx.request.body;
-
     if (product?._id || product?._id === '' || product?._id >= 0) {
         ctx.response.type = 'application/json';
         ctx.response.status = 400; // bad request
@@ -111,6 +110,7 @@ router.post('/', async ctx => {
 router.put('/:id', async ctx => {
     const id = ctx.params.id;
     let existingProductRecord;
+    console.log(ctx.request.body);
     /* check the given id is valid or not. */
     try {
         await isProductIdValid(id);

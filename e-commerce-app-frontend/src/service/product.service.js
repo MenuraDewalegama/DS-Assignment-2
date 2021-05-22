@@ -37,40 +37,21 @@ const getProductByID = (productID) => {
  * @param product product object with and new values but the ID .
  * @returns Promise promise a result. */
 const saveProduct = (product) => {
-    return new Promise((resolve, reject) => {
-        const formData = configureFormDataObject(true, product);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const formData = await configureFormDataObject(true, product);
 
-        /* send a post request to the backend using axios. */
-        const result = axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}products`, {
-            data: formData
-        });
-
-        result.then(response => {
-            console.log('result.then called!');
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers);
-            console.log(response.config);
-            resolve(response);
-        }).catch(error => {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
+            try { /* send a post request to the backend using axios. */
+                const response = await axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}products`, formData);
+                resolve(response);
+            } catch (error) {
+                reject(error);
             }
+
+        } catch (error) {
             reject(error);
-        });
+        }
+
     });
 };
 
@@ -78,23 +59,14 @@ const saveProduct = (product) => {
  * @param product product object with the ID and new values.
  * @returns Promise promise a result. */
 const updateProduct = (product) => {
-    return new Promise((resolve, reject) => {
-        const formData = configureFormDataObject(false, product);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const formData = await configureFormDataObject(false, product);
 
-        /* send a put request to the backend using axios. */
-        const result = axios.put(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${product?.id}`, {
-            data: formData
-        });
-
-        result.then(response => {
-            console.log('result.then called!');
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers);
-            console.log(response.config);
+            /* send a put request to the backend using axios. */
+            const response = axios.put(`${process.env.ECOMMERCE_BACKEND_API_URL}products/${product?.id}`, formData);
             resolve(response);
-        }).catch(error => {
+        } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
@@ -110,8 +82,9 @@ const updateProduct = (product) => {
                 // Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
             }
+            console.log(error.config);
             reject(error);
-        });
+        }
     });
 };
 
@@ -138,32 +111,40 @@ const deleteProduct = (productID) => {
  * @param product product object that is used to be saved or updated.
  * @return FormData configured formData object. */
 const configureFormDataObject = (isAdding, product) => {
-    const formData = new FormData();
-    formData.append('name', product.name);
-    formData.append('description', product.description);
-    formData.append('unitPrice', product.unitPrice);
-    formData.append('handOnQuantity', product.handOnQuantity);
+    return new Promise((resolve, reject) => {
+        console.log('configureFormDataObject product obj: ', product);
+        try {
+            let formData = new FormData();
+            formData.append('name', product.name);
+            formData.append('description', product.description);
+            formData.append('unitPrice', product.unitPrice);
+            formData.append('handOnQuantity', product.handOnQuantity);
 
-    if (isAdding && product.hasOwnProperty('productImage') && product.productImage) {
-        /* append the image to the formData, if only client did upload any image. */
-        formData.append('productImage', product.productImage);
-    }
-
-    if (!isAdding) {
-        /* ready the formData object for update operation. */
-        if (product.hasOwnProperty('productImage') && product.productImage) {
-            /* append the image to the formData, if only client did upload any image. */
-            formData.append('productImage', product.productImage);
-        } else {
-            /* append the imagePath to the formData, if only client did not upload any image
-            or if in case client wants to remove the existing image. */
-            if (product.hasOwnProperty('imagePath') && product.imagePath) {
-                formData.append('imagePath', product.imagePath);
+            if (isAdding && product.hasOwnProperty('productImage') && product.productImage) {
+                /* append the image to the formData, if only client did upload any image. */
+                formData.append('productImage', product.productImage);
             }
-        }
-    }
 
-    return formData;
+            if (!isAdding) {
+                /* ready the formData object for update operation. */
+                if (product.hasOwnProperty('productImage') && product.productImage) {
+                    /* append the image to the formData, if only client did upload any image. */
+                    formData.append('productImage', product.productImage);
+                } else {
+                    /* append the imagePath to the formData, if only client did not upload any image
+                        or if in case client wants to remove the existing image. */
+                    if (product.hasOwnProperty('imagePath')) {
+                        formData.append('imagePath', product.imagePath);
+                    }
+                }
+            }
+
+            console.log('configureFormDataObject formData obj: ', [...formData]);
+            resolve(formData);
+        } catch (error) {
+            reject(error);
+        }
+    });
 };
 
 module.exports = {

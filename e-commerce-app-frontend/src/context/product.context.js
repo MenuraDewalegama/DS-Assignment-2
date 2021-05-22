@@ -4,6 +4,8 @@
 */
 import React, {Component} from 'react';
 import ProductService from '../service/product.service';
+import sha256 from 'crypto-js/sha256';
+import axios from '../service/axios.service';
 
 /* create product context with default values. */
 const ProductContext = React.createContext({
@@ -29,11 +31,14 @@ class ProductProvider extends Component {
         };
     }
 
-    componentDidMount() {
-        this.getAllProducts().then(productsArr => {
-        }).catch(reason => {
-            console.error(reason);
-        });
+    async componentDidMount() {
+        const jwtToken = sessionStorage.getItem(sha256(process.env.JWT_TOKEN_NAME));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+        try {
+            await this.getAllProducts();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     /** Get all the products by calling backend.
@@ -94,12 +99,26 @@ class ProductProvider extends Component {
                 const response = await ProductService.saveProduct(product);
                 if (response.status === 201) {
                     /* 201 -  created. */
-                    const responseResultObject = JSON.parse(response.data);
-                    this.setState((prevState) =>
-                        prevState.products.unshift({
-                            ...product,
-                            id: responseResultObject?.generatedId
-                        }));
+                    const responseResultObject = response.data;
+                    const newProductList = [...this.state.products];
+                    newProductList.unshift({
+                        ...product,
+                        _id: responseResultObject?.generatedId
+                    });
+
+                    this.setState({
+                        products: newProductList
+                    });
+
+                    console.log('setStated list: ', this.state.products);
+                    const addedProduct = this.state
+                        .products.find(productElem => productElem._id === responseResultObject?.generatedId);
+                    console.log(addedProduct);
+                    if (addedProduct) {
+                        resolve(addedProduct);
+                    } else {
+                        reject(new Error('Product was not inserted successfully!'));
+                    }
                 }
             } catch (error) {
                 reject(error);
@@ -120,7 +139,8 @@ class ProductProvider extends Component {
                     /* get the products array. */
                     const productsArr = [...this.state.products];
                     /* find the index of the updated product element/object. */
-                    const indexOfProduct = productsArr.findIndex((productElem, index) => productElem.id === product.id);
+                    const indexOfProduct = productsArr
+                        .findIndex((productElem, index) => productElem.id === product.id);
                     /* replace the updated product with the old one. */
                     productsArr.splice(indexOfProduct, 1, product);
 
