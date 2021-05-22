@@ -17,13 +17,15 @@ export default class Products extends React.Component {
 
     render() {
         const {products} = this.props;
+  
         return (
             <Container style={{padding: '2rem 0'}}>
                 {/* header. */}
+
                 <Container fluid className="products-header p-0">
                     <Row>
                         <Col>
-                            <h1>Products</h1>
+                           <h1>Products</h1>
                         </Col>
                         <Col style={{
                             display: 'flex',
@@ -31,10 +33,9 @@ export default class Products extends React.Component {
                             justifyContent: 'flex-end',
                             justifyItems: 'center'
                         }}>
-                            {(true) ? <Link to="/products/add">< Button> Add < /Button></Link> : ""}
+                            {(true) ? <Link to="/products/add">< Button> Add </Button></Link> : ""}
                         </Col>
                     </Row>
-
                 </Container>
 
                 <Container fluid>
@@ -45,11 +46,11 @@ export default class Products extends React.Component {
                                 key={product.id.toString()} product={product}
                                 selectProduct={product => {
                                     this.selectProduct(product);
-                                    console.log(product);
                                 }}/>;
                         })}
                     </Row>
                 </Container>
+
             </Container>
         );
     }
