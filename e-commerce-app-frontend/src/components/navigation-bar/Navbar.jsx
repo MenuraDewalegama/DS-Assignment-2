@@ -9,7 +9,7 @@ import {UserContext} from '../../context/user.context';
 import Login from '../login/Login';
 import Register from '../register/Register';
 import Cart from '../cart/Cart';
-import Delivery from '../delivery/Delivery';
+import Delivery from '../payment/PaymentHolder';
 import Credit from '../payment/Credit';
 import Mobile from '../payment/Mobile';
 
