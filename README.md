@@ -32,6 +32,9 @@ Tech behind the E-Commerce web application:
 ### Prerequisites
 - Required NodeJs version v16.2.0 installed in the system.
 - Required MongoDB installed in the system.
+- Required MongoDB installed IntegrationStudio in the system.
+- Required MongoDB installed WSO2 enterprise integrator in the system.
+
 
 ### Cloning the project
 ```sh
@@ -69,6 +72,25 @@ your preferred browser.
 
 ```sh
 localhost:1234
+```
+
+### ESB
+Import the E-Commerce project from IntegrationStudio
+
+```sh
+create new server
+start enterprise integrator
+```
+
+Verify the deployment by navigating to your server address in
+your preferred browser.
+
+
+Automatically open up WSO2 Enterprise Integrator in your browser
+
+if not
+```sh
+https://localhost:9443/carbon/admin/login.jsp
 ```
 
 ## License
