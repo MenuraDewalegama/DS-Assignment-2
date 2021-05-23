@@ -6,8 +6,62 @@ info:
 servers:
 - url: http://localhost:8290/api
 paths:
-  /:
+  /*:
     get:
+      responses:
+        default:
+          description: Default response
+    put:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+    delete:
+      responses:
+        default:
+          description: Default response
+    options:
+      responses:
+        default:
+          description: Default response
+    head:
+      responses:
+        default:
+          description: Default response
+    patch:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
       responses:
         default:
           description: Default response
