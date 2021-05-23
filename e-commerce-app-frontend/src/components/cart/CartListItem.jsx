@@ -1,14 +1,13 @@
 
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-/*icons*/
 import { Trash } from 'react-bootstrap-icons';
 import { Link, useHistory } from 'react-router-dom';
 import { cartList, cartTotal } from '../product/ProductListItem';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-/* TODO: this will be removed. */
+
 
 const fontStyle = {
     fontSize: 'medium',
@@ -23,15 +22,7 @@ export default function CartListItem(props) {
     /* remove  the product from the cart. */
     const onRemove = () => {
         const index = cartList.indexOf(product);
-
         cartList.splice(index, 1);
-
-        // cartTotal = parseInt(cartTotal) - parseInt(product.unitPrice);
-        // console.log(cartTotal)
-
-        
-
-
     };
 
     console.log(product);
@@ -53,16 +44,15 @@ export default function CartListItem(props) {
                 <Col>
                     <Card style={{ width: '20rem', height: '15rem' }}>
                         <Card.Body>
-                            <Card.Title>{product.name}</Card.Title>
+                            <Card.Title><b>{product.name}</b></Card.Title>
                             <Card.Text style={fontStyle}>
                                 Description: {product.description}
                             </Card.Text>
-                            <Card.Text>Unit Price: {product.unitPrice}</Card.Text>
+                            <b><Card.Text style={{color:'green', fontSize:'25px', marginBlockEnd:'5%'}}>Unit Price: Rs{product.unitPrice}/=</Card.Text></b>
 
                             <Row>
                                 {
                                     // product delete button
-
                                     (true) ? (
                                         <Link to="/" style={{ color: 'white', margin: 'auto' }}>
                                             <Button
@@ -70,7 +60,6 @@ export default function CartListItem(props) {
                                                 variant="danger"
                                                 onClick={() => {
                                                     onRemove();
-
                                                     notify();
                                                 }}
                                                 title="Delete Product"
