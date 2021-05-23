@@ -89,7 +89,7 @@ export default function ProductListItem(props) {
                             <Card.Text style={fontStyle}>
                                 Description: {product.description}
                             </Card.Text>
-                            <Card.Text style={{ color: 'green' }}>Unit Price:Rs.<b>{product.unitPrice}</b></Card.Text>
+                            <b><Card.Text style={{color:'green', fontSize:'25px'}}>Unit Price: Rs{product.unitPrice}/=</Card.Text></b>
                             <Card.Text>Hand On Quantity: {product.handOnQuantity}</Card.Text>
 
                             <Row style={{ marginTop: '25%' }}>

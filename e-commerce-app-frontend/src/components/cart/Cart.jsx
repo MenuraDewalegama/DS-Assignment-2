@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import CartHolder from '../cart/CartHolder';
 
 export default class Cart extends React.Component {
@@ -13,7 +13,7 @@ export default class Cart extends React.Component {
                 <Switch>
                     {/* product component */}
                     <Route path="/cart">
-                        <CartHolder/>
+                        <CartHolder />
                     </Route>
                 </Switch>
             </div>
