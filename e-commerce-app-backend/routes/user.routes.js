@@ -61,7 +61,7 @@ router.post('/', async (ctx) => {
     const user = ctx.request.body;
     /* This variable holds the encoded user password. */
     let hashedPassword;
-
+    console.log(ctx.request.body);
     /* validate user input. */
     const validationResult = userValidation.validateUser(user);
     if (validationResult.length !== 0) {
