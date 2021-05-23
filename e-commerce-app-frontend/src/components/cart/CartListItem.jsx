@@ -39,7 +39,6 @@ export default function CartListItem(props) {
             <Row>
                 <Col>
                     <Card style={{width: '20rem'}}>
-                        <Card.Img variant="top" src="https://via.placeholder.com/300"/>
                         <Card.Body>
                             <Card.Title>Name: {product.name}</Card.Title>
                             <Card.Text style={fontStyle}>

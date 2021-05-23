@@ -24,6 +24,7 @@ export default class Carts extends React.Component {
         const removeAll = () => {
             cartList.splice(0, cartList.length);
         };
+        
         const notify = () =>
             toast.error('All the items Removed from Cart', {
                 position: 'top-right',
@@ -70,10 +71,10 @@ export default class Carts extends React.Component {
                                 ''
                             )}
                             {cartList.length > 0 ? (
-                                <Link to="/delivery" style={{marginLeft: '5%'}}>
+                                <Link to="/Delivery" style={{marginLeft: '5%'}}>
                                     {' '}
                                     <Button onClick={() => {
-                                    }}> Next </Button>
+                                    }}> Proceed to payment </Button>
                                 </Link>
                             ) : (
                                 ''
