@@ -53,7 +53,7 @@ class ProductProvider extends Component {
                 }
             } else {
                 const resultProductList = [...this.state.products]
-                    .filter(option => option.name.toLowerCase().indexOf(searchValue.toLowerCase()) === 0);
+                    .filter(option => option.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0);
                 console.log('result', resultProductList);
                 this.setState({
                     products: resultProductList
