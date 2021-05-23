@@ -1,9 +1,9 @@
 import React from 'react';
-import {cartList, cartTotal} from '../product/ProductListItem';
-import {Button, Col, Container, Row} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { cartList, cartTotal } from '../product/ProductListItem';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import CartListItem from './CartListItem';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductListItem from '../product/ProductListItem'
 
@@ -16,17 +16,17 @@ export default class Carts extends React.Component {
     }
 
     selectProduct(product) {
-        this.setState({product: product});
+        this.setState({ product: product });
     }
 
     render() {
-        const {products} = this.props;
+        const { products } = this.props;
 
         const removeAll = () => {
             cartList.splice(0, cartList.length);
 
         };
-        
+
         const notify = () =>
             toast.error('All the items Removed from Cart', {
                 position: 'top-right',
@@ -39,16 +39,13 @@ export default class Carts extends React.Component {
             });
 
         return (
-            <Container style={{padding: '2rem 0'}}>
+            <Container style={{ padding: '2rem 0' }}>
                 {/* header. */}
 
                 <Container fluid className="products-header p-0">
                     <Row>
                         <Col>
                             <h1>Cart</h1>
-                        </Col>
-                        <Col>
-                            <h1>Total : Rs.{cartTotal}</h1>
                         </Col>
                         <Col
                             style={{
@@ -62,11 +59,11 @@ export default class Carts extends React.Component {
                                 <Link to="/">
                                     {' '}
                                     <Button
-                                        style={{backgroundColor: 'red'}}
+                                        style={{ backgroundColor: 'red' }}
                                         onClick={() => {
                                             removeAll();
                                             notify();
-                                            
+
                                         }}
                                     >
                                         {' '}
@@ -77,7 +74,7 @@ export default class Carts extends React.Component {
                                 ''
                             )}
                             {cartList.length > 0 ? (
-                                <Link to="/delivery" style={{marginLeft: '5%'}}>
+                                <Link to="/delivery" style={{ marginLeft: '5%' }}>
                                     {' '}
                                     <Button onClick={() => {
                                     }}> Proceed to payment </Button>
