@@ -14,7 +14,7 @@ export default class Register extends React.Component {
             name: null,
             contactNo: null,
             password: null,
-            type: null
+            type: ''
         };
     }
 
@@ -89,10 +89,11 @@ export default class Register extends React.Component {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicDelivery">
+                    <Form.Group controlId="formBasicUserType">
                         <Form.Label>User Type</Form.Label>
                         <Form.Control name="type" as="select"
                                       custom
+                                      defaultValue='USER'
                                       onChange={(event) => this.onChange(event)}>
                             <option value="USER">USER</option>
                             <option value="ADMIN">ADMIN</option>
