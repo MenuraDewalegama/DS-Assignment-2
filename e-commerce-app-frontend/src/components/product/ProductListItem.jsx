@@ -28,6 +28,12 @@ export default function ProductListItem(props) {
         ) === 'ADMIN'
     );
 
+    const [isUser, setIsUser] = useState(
+        atob(
+            sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))
+        ) === 'USER'
+    );
+
     /* add the product in to cart. */
     const onClickAddToCart = () => {
         cartList.push(product);
@@ -107,12 +113,16 @@ export default function ProductListItem(props) {
                                         >
                                             <PencilSquare style={{ fontSize: '1.6rem' }} />
                                         </Button>
+                                        
                                     ) : (
                                         ''
                                     )
                                 }
 
-                                <Link to="/cart" style={{ color: 'white', margin: 'auto' }}>
+
+                                {
+                                    isUser ?
+                                    ( <Link to="/cart" style={{ color: 'white', margin: 'auto' }}>
                                     <Button
                                         style={{ margin: 'auto', padding: '0.4rem 1rem' }}
                                         variant="primary"
@@ -125,7 +135,17 @@ export default function ProductListItem(props) {
                                     >
                                         <CartPlus style={{ fontSize: '1.6rem' }} />
                                     </Button>
-                                </Link>
+                                </Link>)
+                                    
+                                    :
+                                    
+                                    ('')
+                                }
+
+
+                               
+
+
                             </Row>
                         </Card.Body>
                     </Card>
