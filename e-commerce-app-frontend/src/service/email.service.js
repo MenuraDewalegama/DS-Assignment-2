@@ -15,14 +15,14 @@ const sendEmail = ({
                        user_id,
                        service_id,
                        template_id,
-                       template_params: {from_name, to_name, reply_to, message},
+                       template_params: {from_name, to_name, reply_to, address, message, itemName, quantity, unitPrice, total},
                        accessToken
                    }) => {
     const sendData = {
         user_id,
         service_id,
         template_id,
-        template_params: {from_name, to_name, reply_to, message},
+        template_params: {from_name, to_name, reply_to,address, message, itemName, quantity, unitPrice, total},
         accessToken
     };
 
@@ -59,3 +59,6 @@ const sendEmail = ({
 //     console.error(reason);
 // });
 
+module.exports = {
+    sendEmail
+};
