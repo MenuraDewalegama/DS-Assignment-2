@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {cartList} from '../product/ProductListItem';
+import EmailService from "../../service/email.service";
+import sha256 from 'crypto-js/sha256';
 
 export default class Credit extends React.Component {
     constructor(props) {
@@ -23,7 +25,7 @@ export default class Credit extends React.Component {
         this.setState({[name]: value});
     }
     
-     confirmPayment = () => {
+    confirmPayment = () => {
         const { address, email } = this.state.getData;
         console.log(address, email);
 
@@ -37,16 +39,31 @@ export default class Credit extends React.Component {
 
         cartList.splice(0, cartList.length);
 
-        window.location = '/';
-
-
+        EmailService.sendEmail({
+            user_id: 'user_Swzja6hgJOB3MOMfn8x53',
+            service_id: 'service_727resg',
+            template_id: 'template_3cvmc3f',
+            template_params: {
+                from_name: 'CODE4.Technology E-commerce-System',
+                to_name: atob(sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_NAME))),
+                reply_to: email,
+                address: address,
+                message: 'Congradulations...! Your Order is confirmed. Details as below...',
+                itemName: 'Item Name',
+                quantity: 'Quantity',
+                unitPrice: 'Unit Price',
+                total: 'Total'
+            },
+            accessToken: '6ceb240ee4e4e409d19845b2e08cd7fa'
+        }).then(response => {
+            window.location = '/';
+            console.log(response);
+        }).catch(reason => {
+            console.error(reason);
+        });
     };
 
-
- 
-
     render() {
-
         const notify = () =>
 
         toast.success('Item purchased succesfully. Please check your mail inbox', {
