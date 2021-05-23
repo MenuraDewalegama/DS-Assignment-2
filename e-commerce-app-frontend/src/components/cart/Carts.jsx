@@ -23,8 +23,8 @@ export default class Carts extends React.Component {
         const {products} = this.props;
 
         const removeAll = () => {
-            cartList.splice(0, cartList.length); 
-           
+            cartList.splice(0, cartList.length);
+
         };
         
         const notify = () =>
@@ -66,7 +66,7 @@ export default class Carts extends React.Component {
                                         onClick={() => {
                                             removeAll();
                                             notify();
-                                                                                        
+                                            
                                         }}
                                     >
                                         {' '}
