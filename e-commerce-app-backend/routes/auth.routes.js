@@ -40,6 +40,7 @@ router.post('/', async ctx => {
             console.log(generatedJWT);
             ctx.response.body = generatedJWT;
         } catch (error) {
+            console.log(error);
             ctx.response.status = 500;
         }
 
