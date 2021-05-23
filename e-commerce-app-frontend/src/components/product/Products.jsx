@@ -19,9 +19,7 @@ export default class Products extends React.Component {
   render() {
     const { products } = this.props;
     const isAdmin =
-      atob(
-        sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))
-      ) === "ADMIN";
+      atob(sessionStorage.getItem(sha256(process.env.AUTHENTICATED_USER_TYPE))) === "ADMIN";
     return (
       <Container style={{ padding: "2rem 0" }}>
         {/* header. */}
@@ -31,6 +29,9 @@ export default class Products extends React.Component {
             <Col>
               <h1>Products</h1>
             </Col>
+              <Col>
+                  <h1>Batman</h1>
+              </Col>
             <Col
               style={{
                 display: "flex",
@@ -39,13 +40,10 @@ export default class Products extends React.Component {
                 justifyItems: "center",
               }}
             >
-              {isAdmin ? (
+              {(isAdmin) ? (
                 <Link to="/products/add">
                   <Button> Add </Button>
-                </Link>
-              ) : (
-                ""
-              )}
+                </Link>) : ("")}
             </Col>
           </Row>
         </Container>
