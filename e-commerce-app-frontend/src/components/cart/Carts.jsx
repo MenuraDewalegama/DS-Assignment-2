@@ -71,7 +71,7 @@ export default class Carts extends React.Component {
                                 ''
                             )}
                             {cartList.length > 0 ? (
-                                <Link to="/Delivery" style={{marginLeft: '5%'}}>
+                                <Link to="/delivery" style={{marginLeft: '5%'}}>
                                     {' '}
                                     <Button onClick={() => {
                                     }}> Proceed to payment </Button>
