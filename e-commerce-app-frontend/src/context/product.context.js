@@ -41,6 +41,28 @@ class ProductProvider extends Component {
         }
     }
 
+    /** Search prodcut by product name. */
+    filterProductsByName(searchValue) {
+        console.log('search Value: ', searchValue);
+        return new Promise(async (resolve, reject) => {
+            if (!searchValue || this.state.products.length === 0) {
+                try {
+                    await this.getAllProducts();
+                } catch (error) {
+                    reject(error);
+                }
+            } else {
+                const resultProductList = [...this.state.products]
+                    .filter(option => option.name.toLowerCase().indexOf(searchValue.toLowerCase()) === 0);
+                console.log('result', resultProductList);
+                this.setState({
+                    products: resultProductList
+                });
+                resolve(true);
+            }
+        });
+    }
+
     /** Get all the products by calling backend.
      * @return Promise with a result. If success, then resolve the product.
      * otherwise, reject the error(errorRespond) */
@@ -185,6 +207,7 @@ class ProductProvider extends Component {
                 addProduct: this.addProduct.bind(this),
                 updateProduct: this.updateProduct.bind(this),
                 deleteProduct: this.deleteProduct.bind(this),
+                filterProductsByName: this.filterProductsByName.bind(this)
             }
             }>
                 {this.props.children}
