@@ -1,10 +1,11 @@
 import React from 'react';
-import {cartList} from '../product/ProductListItem';
+import {cartList, cartTotal} from '../product/ProductListItem';
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import CartListItem from './CartListItem';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProductListItem from '../product/ProductListItem'
 
 export default class Carts extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export default class Carts extends React.Component {
 
         const removeAll = () => {
             cartList.splice(0, cartList.length);
+
         };
         
         const notify = () =>
@@ -45,6 +47,9 @@ export default class Carts extends React.Component {
                         <Col>
                             <h1>Cart</h1>
                         </Col>
+                        <Col>
+                            <h1>Total : Rs.{cartTotal}</h1>
+                        </Col>
                         <Col
                             style={{
                                 display: 'flex',
@@ -61,6 +66,7 @@ export default class Carts extends React.Component {
                                         onClick={() => {
                                             removeAll();
                                             notify();
+                                            
                                         }}
                                     >
                                         {' '}

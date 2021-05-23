@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
-import {Button, Card, Col, Row} from 'react-bootstrap';
+
+
+import React, { useState } from 'react';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 /*icons*/
-import {CartPlus, PencilSquare} from 'react-bootstrap-icons';
-import {Link, useHistory} from 'react-router-dom';
+import { CartPlus, PencilSquare } from 'react-bootstrap-icons';
+import { Link, useHistory } from 'react-router-dom';
 import sha256 from 'crypto-js/sha256';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 /* TODO: this will be removed. */
+
 export const cartList = [];
+export let cartTotal = 0;
 
 const fontStyle = {
     fontSize: 'medium',
 };
 
 export default function ProductListItem(props) {
-    const {product, selectProduct} = props;
+    const { product, selectProduct } = props;
     let history = useHistory();
 
     const [isAdmin, setIsAdmin] = useState(
@@ -28,7 +32,25 @@ export default function ProductListItem(props) {
     const onClickAddToCart = () => {
         cartList.push(product);
         console.log(cartList);
+        cartTotal = parseInt(cartTotal) + parseInt(product.unitPrice)
+        console.log(cartTotal);
     };
+
+
+
+    const amountReduce = (price) => {
+        cartTotal = parseInt(cartTotal) - parseInt(price)
+        console.log(cartTotal);
+    };
+
+    const amountReset = () => {
+        cartTotal = 0;
+        console.log(cartTotal);
+    };
+
+
+
+
 
     /** redirecting to the edit page,using product ID. */
     const redirectToEdit = () => {
@@ -47,13 +69,13 @@ export default function ProductListItem(props) {
         });
 
     return (
-        <div style={{marginRight: '5%'}}>
-            <br/>
+        <div style={{ marginRight: '5%' }}>
+            <br />
             <Row>
                 <Col>
-                    <Card style={{width: '20rem', height:'40rem'}}>
+                    <Card style={{ width: '20rem', height: '40rem' }}>
                         <Card.Img
-                            style={{objectFit: 'cover', maxHeight: '300px'}}
+                            style={{ objectFit: 'cover', maxHeight: '300px' }}
                             variant="top"
                             src={
                                 product?.imagePath
@@ -63,19 +85,19 @@ export default function ProductListItem(props) {
                             alt="Product image"
                         />
                         <Card.Body>
-                            <Card.Title>Name: {product.name}</Card.Title>
+                            <Card.Title><b>{product.name}</b></Card.Title>
                             <Card.Text style={fontStyle}>
                                 Description: {product.description}
                             </Card.Text>
-                            <Card.Text>Unit Price: {product.unitPrice}</Card.Text>
+                            <Card.Text style={{ color: 'green' }}>Unit Price:Rs.<b>{product.unitPrice}</b></Card.Text>
                             <Card.Text>Hand On Quantity: {product.handOnQuantity}</Card.Text>
 
-                            <Row style={{marginTop: '25%'}}>
+                            <Row style={{ marginTop: '25%' }}>
                                 {
                                     // product edit button
                                     isAdmin ? (
                                         <Button
-                                            style={{margin: 'auto', padding: '0.4rem 1rem'}}
+                                            style={{ margin: 'auto', padding: '0.4rem 1rem' }}
                                             variant="primary"
                                             onClick={() => {
                                                 selectProduct(product);
@@ -83,16 +105,16 @@ export default function ProductListItem(props) {
                                             }}
                                             title="Edit Product"
                                         >
-                                            <PencilSquare style={{fontSize: '1.6rem'}}/>
+                                            <PencilSquare style={{ fontSize: '1.6rem' }} />
                                         </Button>
                                     ) : (
                                         ''
                                     )
                                 }
 
-                                <Link to="/cart" style={{color: 'white', margin: 'auto'}}>
+                                <Link to="/cart" style={{ color: 'white', margin: 'auto' }}>
                                     <Button
-                                        style={{margin: 'auto', padding: '0.4rem 1rem'}}
+                                        style={{ margin: 'auto', padding: '0.4rem 1rem' }}
                                         variant="primary"
                                         onClick={() => {
                                             selectProduct(product);
@@ -101,7 +123,7 @@ export default function ProductListItem(props) {
                                         }}
                                         title="Add to Cart"
                                     >
-                                        <CartPlus style={{fontSize: '1.6rem'}}/>
+                                        <CartPlus style={{ fontSize: '1.6rem' }} />
                                     </Button>
                                 </Link>
                             </Row>
@@ -112,3 +134,4 @@ export default function ProductListItem(props) {
         </div>
     );
 }
+
