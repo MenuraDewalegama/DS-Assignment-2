@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {cartList} from '../product/ProductListItem';
+import {cartList,cartTotal} from '../product/ProductListItem';
 
 export default class Credit extends React.Component {
     constructor(props) {
@@ -17,6 +17,7 @@ export default class Credit extends React.Component {
             getData: this.props.getData
         };
     }
+    
 
     onChange(event) {
         const {name, value} = event.target;
@@ -37,15 +38,16 @@ export default class Credit extends React.Component {
 
         cartList.splice(0, cartList.length);
 
-        window.location = '/';
+        window.location = '/products';
 
 
     };
 
 
- 
+
 
     render() {
+
 
         const notify = () =>
 
@@ -116,12 +118,15 @@ export default class Credit extends React.Component {
                         <Form.Control name="amount"
                             type="text"
                             placeholder="Amount"
+                            value={cartTotal}
+                            disabled
                             onChange={(event) => this.onChange(event)}
                         />
                     </Form.Group>
 
                     <hr></hr>
                     <br />
+                    <Link to="/">
                     <Button  onClick={() => {
                                             this.confirmPayment();
                                             notify();
@@ -129,7 +134,7 @@ export default class Credit extends React.Component {
                                         variant="primary"> Confirm
                         {/* // TODO: if registration successful, then redirect to root URL (/product). */}
                         {/* <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Confirm</Link> */}
-                    </Button>
+                    </Button></Link>
                 </Form>
                 <br />
             </div>
