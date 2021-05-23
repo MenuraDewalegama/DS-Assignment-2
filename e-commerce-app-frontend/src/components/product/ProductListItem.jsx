@@ -51,7 +51,7 @@ export default function ProductListItem(props) {
             <br/>
             <Row>
                 <Col>
-                    <Card style={{width: '20rem'}}>
+                    <Card style={{width: '20rem', height:'40rem'}}>
                         <Card.Img
                             style={{objectFit: 'cover', maxHeight: '300px'}}
                             variant="top"
@@ -70,7 +70,7 @@ export default function ProductListItem(props) {
                             <Card.Text>Unit Price: {product.unitPrice}</Card.Text>
                             <Card.Text>Hand On Quantity: {product.handOnQuantity}</Card.Text>
 
-                            <Row>
+                            <Row style={{marginTop: '25%'}}>
                                 {
                                     // product edit button
                                     isAdmin ? (
