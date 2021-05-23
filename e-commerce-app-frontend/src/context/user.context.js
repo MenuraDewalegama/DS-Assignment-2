@@ -50,6 +50,7 @@ class UserProvider extends Component {
             userID: userID,
             password: password
         };
+        console.log('credentials: ', credentials);
         return new Promise(async (resolve, reject) => {
             try {
                 const jwtToken = await UserService.authenticate(credentials);

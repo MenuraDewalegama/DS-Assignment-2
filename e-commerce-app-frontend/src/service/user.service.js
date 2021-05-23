@@ -89,9 +89,10 @@ const getUserByID = (userID) => {
  * @return Promise a promise with a result. If successful then, resolve the response,
  * otherwise reject the error. */
 const addUser = (user) => {
+    console.log('addUser : ', user);
     return new Promise((resolve, reject) => {
-        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}users`, {
-            data: JSON.stringify(user)
+        axios.post(`${process.env.ECOMMERCE_BACKEND_API_URL}users`, JSON.stringify(user), {
+            headers: {'Content-Type': 'application/json'}
         }).then(response => {
             resolve(response);
         }).catch(error => {
