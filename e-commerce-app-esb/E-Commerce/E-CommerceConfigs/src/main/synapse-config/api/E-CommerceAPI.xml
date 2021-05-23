@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api" name="E-CommerceAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="HEAD DELETE POST GET OPTIONS PUT PATCH">
+        <inSequence>
+            <log>
+                <property name="message" value="Welcome to E-Commerce API"/>
+            </log>
+            <send>
+                <endpoint key="E-CommerceEP"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
