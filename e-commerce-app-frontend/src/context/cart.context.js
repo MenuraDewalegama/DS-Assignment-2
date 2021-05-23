@@ -75,20 +75,21 @@ class CartProvider extends Component {
     }
 
     render() {
-        return (
-            <CartProvider.Provider values={{
+        return (<CartContext.Provider value={
+            {
                 cartProducts: this.state.cartProducts,
                 addToCart: this._addToCart.bind(this),
                 removeFromCart: this._removeFromCart.bind(this),
                 totalAmount: this.state.totalAmount,
                 cleanCart: this._cleanCart.bind(this)
-            }}>
-                {this.props.children}
-            </CartProvider.Provider>
-        );
+            }
+        }>
+            {this.props.children}
+        </CartContext.Provider>);
     }
 }
 
+const CartConsumer = CartContext.Consumer;
 module.exports = {
-    CartProvider, CartContext
+    CartProvider, CartContext, CartConsumer
 };
